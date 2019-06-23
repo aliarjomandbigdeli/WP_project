@@ -1,6 +1,7 @@
 <template>
     <div id="app">
         <MyHeader></MyHeader>
+        <SearchContainer></SearchContainer>
 
         <MyFooter></MyFooter>
     </div>
@@ -15,10 +16,12 @@
     // import HelloWorld from './components/HelloWorld.vue'
     import MyHeader from './components/MyHeader.vue'
     import MyFooter from "@/components/MyFooter";
+    import SearchContainer from "@/components/SearchContainer";
 
     export default {
         name: 'app',
         components: {
+            SearchContainer,
             MyFooter,
             MyHeader
             // HelloWorld

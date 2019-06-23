@@ -5,6 +5,7 @@
         <GuidanceDiv></GuidanceDiv>
         <BestOfMonth></BestOfMonth>
         <BestRestaurants></BestRestaurants>
+        <FoodsDiv></FoodsDiv>
 
         <MyFooter></MyFooter>
     </div>
@@ -23,10 +24,12 @@
     import GuidanceDiv from "@/components/GuidanceDiv";
     import BestOfMonth from "@/components/BestOfMonth";
     import BestRestaurants from "@/components/BestRestaurants";
+    import FoodsDiv from "@/components/FoodsDiv";
 
     export default {
         name: 'app',
         components: {
+            FoodsDiv,
             BestRestaurants,
             BestOfMonth,
             GuidanceDiv,

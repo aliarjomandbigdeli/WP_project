@@ -2,6 +2,7 @@
     <div id="app">
         <MyHeader></MyHeader>
         <SearchContainer></SearchContainer>
+        <GuidanceDiv></GuidanceDiv>
 
         <MyFooter></MyFooter>
     </div>
@@ -17,10 +18,12 @@
     import MyHeader from './components/MyHeader.vue'
     import MyFooter from "@/components/MyFooter";
     import SearchContainer from "@/components/SearchContainer";
+    import GuidanceDiv from "@/components/GuidanceDiv";
 
     export default {
         name: 'app',
         components: {
+            GuidanceDiv,
             SearchContainer,
             MyFooter,
             MyHeader

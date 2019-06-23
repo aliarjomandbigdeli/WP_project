@@ -2,7 +2,7 @@
     <div id="app">
         <MyHeader></MyHeader>
 
-
+        <MyFooter></MyFooter>
     </div>
 
     <!--  <div id="app">-->
@@ -14,10 +14,12 @@
 <script>
     // import HelloWorld from './components/HelloWorld.vue'
     import MyHeader from './components/MyHeader.vue'
+    import MyFooter from "@/components/MyFooter";
 
     export default {
         name: 'app',
         components: {
+            MyFooter,
             MyHeader
             // HelloWorld
         }

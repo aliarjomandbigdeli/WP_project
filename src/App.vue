@@ -1,11 +1,13 @@
 <template>
     <div id="app">
         <MyHeader></MyHeader>
+
         <SearchContainer></SearchContainer>
         <GuidanceDiv></GuidanceDiv>
         <BestOfMonth></BestOfMonth>
         <BestRestaurants></BestRestaurants>
         <FoodsDiv></FoodsDiv>
+        <ContactDiv></ContactDiv>
 
         <MyFooter></MyFooter>
     </div>
@@ -25,10 +27,12 @@
     import BestOfMonth from "@/components/BestOfMonth";
     import BestRestaurants from "@/components/BestRestaurants";
     import FoodsDiv from "@/components/FoodsDiv";
+    import ContactDiv from "@/components/ContactDiv";
 
     export default {
         name: 'app',
         components: {
+            ContactDiv,
             FoodsDiv,
             BestRestaurants,
             BestOfMonth,

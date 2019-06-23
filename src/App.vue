@@ -3,6 +3,7 @@
         <MyHeader></MyHeader>
         <SearchContainer></SearchContainer>
         <GuidanceDiv></GuidanceDiv>
+        <BestOfMonth></BestOfMonth>
 
         <MyFooter></MyFooter>
     </div>
@@ -19,10 +20,12 @@
     import MyFooter from "@/components/MyFooter";
     import SearchContainer from "@/components/SearchContainer";
     import GuidanceDiv from "@/components/GuidanceDiv";
+    import BestOfMonth from "@/components/BestOfMonth";
 
     export default {
         name: 'app',
         components: {
+            BestOfMonth,
             GuidanceDiv,
             SearchContainer,
             MyFooter,

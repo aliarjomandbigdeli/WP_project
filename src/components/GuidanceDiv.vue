@@ -1,37 +1,10 @@
 <template>
     <div id="guidance-div">
-<!--        <div class="guidance-div-items" v-for="item in itemsDetails" :key="item.id">-->
-<!--            <p>{{item.title}}</p>-->
-<!--            <div class="guidance-des-pic-div">-->
-<!--                <div>{{item.message}}</div>-->
-<!--                <div><img :src="item.src" alt="guide"/></div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-
-        <div class="guidance-div-items">
-            <p>شهر و منطقه خود را وارد کنید</p>
+        <div class="guidance-div-items" v-for="item in itemsDetails" :key="item.title">
+            <p>{{item.title}}</p>
             <div class="guidance-des-pic-div">
-                <div>منوی مورد علاقه خود را از بین بیش از 3500 رستوران خوب در تهران و
-                    شهرستان‌ها جستجو کنید.
-                </div>
-                <div><img src="../../mocks/guidance-3.png"></div>
-            </div>
-        </div>
-        <div class="guidance-div-items">
-            <p>غذای خود را انتخاب کنید</p>
-            <div class="guidance-des-pic-div">
-                <div>غذایی که می‌خواهید را انتخاب کنید و بدون هزینه اضافی سفارش خود را
-                    ثبت کنید.
-                </div>
-                <div><img src="../../mocks/guidance-2.png"></div>
-            </div>
-        </div>
-        <div class="guidance-div-items">
-            <p>غذایتان را نوش جان کنید</p>
-            <div class="guidance-des-pic-div">
-                <div>درب منزل یا حضوری از خود رستوران سفارشتان را تحویل بگیرید.</div>
-                <div><img src="../../mocks/guidance-1.png"></div>
+                <div>{{item.message}}</div>
+                <div><img :src="item.src" alt="guide"/></div>
             </div>
         </div>
     </div>
@@ -40,29 +13,38 @@
 <script>
     export default {
         name: "GuidanceDiv",
-
+        mainUrl: "../../mocks/",
         data() {
             return {
                 itemsDetails: [
                     {
                         title: "شهر و منطقه خود را وارد کنید",
                         message: "منوی مورد علاقه خود را از بین بیش از 3500 رستوران خوب در تهران و شهرستان‌ها جستجو کنید.",
-                        src: "../../mocks/guidance-3.png",
-                        id: 1
+                        // src: "@/assets/mocks/guidance-3.png",
+                        src: require("../../mocks/guidance-3.png"),
+                        // src: require(this.urlLoader("guidance-3.png")),
+                        // src: this.urlLoader("guidance-3.png"),
                     },
                     {
                         title: "غذای خود را انتخاب کنید",
                         message: "غذایی که می‌خواهید را انتخاب کنید و بدون هزینه اضافی سفارش خود را ثبت کنید.",
-                        src: "../../mocks/guidance-2.png",
-                        id: 2
+                        // src: "../../mocks/guidance-2.png",
+                        src: require("../../mocks/guidance-2.png"),
                     },
                     {
                         title: "غذایتان را نوش جان کنید",
                         message: "درب منزل یا حضوری از خود رستوران سفارشتان را تحویل بگیرید.",
-                        src: "../../mocks/guidance-1.png",
-                        id: 3
+                        src: require("../../mocks/guidance-1.png"),
+                        // src: "../../mocks/guidance-1.png",
                     }
                 ]
+            }
+        },
+        methods: {
+            urlLoader(url) {
+                // return require(this.mainUrl.concat(url))
+                let main = this.mainUrl;
+                return main.concat(url)
             }
         }
     }

@@ -20,4 +20,3 @@
 <style scoped>
 
 </style>
-<style src="./global.css"></style>

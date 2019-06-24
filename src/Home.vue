@@ -46,4 +46,3 @@
         }
     }
 </style>
-<style src="./global.css"></style>

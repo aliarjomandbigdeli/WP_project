@@ -16,7 +16,7 @@
                 <option value="مشهد">مشهد</option>
             </select>
             <div id="search-input">
-                <input list="districts" name="district" placeholder="مثلا نیاوران" dir="rtl">
+                <input list="districts" name="district" placeholder="مثلا نیاوران" dir="rtl" @keyup.enter="onSubmit">
                 <datalist id="districts">
                     <option>&#128205;جستجو خودکار منطقه شما</option>
                     <!--                    <option value="&#128205;جستجو خودکار منطقه شما">&#128205;جستجو خودکار منطقه شما</option>-->
@@ -49,8 +49,15 @@
 </template>
 
 <script>
+    import router from '../router'
+
     export default {
-        name: "SearchContainer"
+        name: "SearchContainer",
+        methods:{
+            onSubmit(){
+                router.push({ name: "SearchPage" });
+            }
+        }
     }
 </script>
 

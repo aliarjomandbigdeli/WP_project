@@ -11,15 +11,9 @@
 
         <MyFooter></MyFooter>
     </div>
-
-    <!--  <div id="app">-->
-    <!--    <img alt="Vue logo" src="./assets/logo.png">-->
-    <!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
-    <!--  </div>-->
 </template>
 
 <script>
-    // import HelloWorld from './components/HelloWorld.vue'
     import MyHeader from './components/MyHeader.vue'
     import MyFooter from "@/components/MyFooter";
     import SearchContainer from "@/components/SearchContainer";
@@ -40,7 +34,6 @@
             SearchContainer,
             MyFooter,
             MyHeader
-            // HelloWorld
         }
     }
 </script>

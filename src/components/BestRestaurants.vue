@@ -2,84 +2,10 @@
     <div id="best-restaurant-div">
         <h3 id="best-restaurant-title">رستوران‌های خوب تهران در ریحون</h3>
         <div id="best-rest-grid">
-<!--            <a href="" v-for="item in itemsDetails" :key="item.title">-->
-<!--                <div class="grid-item">-->
-<!--                    <div><img :src="item.src"></div>-->
-<!--                    <div>{{item.title}}</div>-->
-<!--                </div>-->
-<!--            </a>-->
-
-
-            <a href="">
+            <a href="" v-for="detail in restaurants.slice(3)" :key="detail.name">
                 <div class="grid-item">
-                    <div><img src="../../mocks/restaurants/res(1).jpg"></div>
-                    <div>آمولای</div>
-                </div>
-            </a>
-            <a href="">
-                <div class="grid-item">
-                    <div><img src="../../mocks/restaurants/res(2).jpg"></div>
-                    <div>تهیه غذای راد</div>
-                </div>
-            </a>
-            <a href="">
-                <div class="grid-item">
-                    <div><img src="../../mocks/restaurants/res(3).jpg"></div>
-                    <div>شاندیز جردن</div>
-                </div>
-            </a>
-            <a href="">
-                <div class="grid-item">
-                    <div><img src="../../mocks/restaurants/res(4).jpg"></div>
-                    <div>ویترین</div>
-                </div>
-            </a>
-            <a href="">
-                <div class="grid-item">
-                    <div><img src="../../mocks/restaurants/res(5).jpg"></div>
-                    <div>رستوران کوبابا</div>
-                </div>
-            </a>
-            <a href="">
-                <div class="grid-item">
-                    <div><img src="../../mocks/restaurants/res(6).jpg"></div>
-                    <div>جوگریل فود</div>
-                </div>
-            </a>
-            <a href="">
-                <div class="grid-item">
-                    <div><img src="../../mocks/restaurants/res(7).jpg"></div>
-                    <div>لانجین</div>
-                </div>
-            </a>
-            <a href="">
-                <div class="grid-item">
-                    <div><img src="../../mocks/restaurants/res(8).jpg"></div>
-                    <div>جنارو</div>
-                </div>
-            </a>
-            <a href="">
-                <div class="grid-item">
-                    <div><img src="../../mocks/restaurants/res(9).jpg"></div>
-                    <div>شیرین پلو</div>
-                </div>
-            </a>
-            <a href="">
-                <div class="grid-item">
-                    <div><img src="../../mocks/restaurants/res(10).jpg"></div>
-                    <div>امیر شکلات</div>
-                </div>
-            </a>
-            <a href="">
-                <div class="grid-item">
-                    <div><img src="../../mocks/restaurants/res(11).jpg"></div>
-                    <div>کترینگ و تشریفات<br> ناریجه</div>
-                </div>
-            </a>
-            <a href="">
-                <div class="grid-item">
-                    <div><img src="../../mocks/restaurants/res(12).jpg"></div>
-                    <div>تومو</div>
+                    <div><img height="82" width="82" :src="detail.imgUrl"></div>
+                    <div>{{detail.name}}</div>
                 </div>
             </a>
         </div>
@@ -92,21 +18,30 @@
 
         data() {
             return {
-                itemsDetails: [
-                    {
-                        title: "آمولای",
-                        src: "../../mocks/restaurants/res(1).jpg",
-                    },
-                    {
-                        title: "تهیه غذای راد",
-                        src: "../../mocks/restaurants/res(2).jpg",
-                    },
-                    {
-                        title: "شاندیز جردن",
-                        src: "../../mocks/restaurants/res(3).jpg",
-                    }
-                ]
+                restaurants: [],
+                dictionary: {
+                    sandwich: "ساندویچ",
+                    burger: "برگر",
+                    pizza: "پیتزا",
+                    kebab: "کباب",
+                    salad: "سالاد",
+                    iranian: "ایرانی",
+                    pasta: "پاستا",
+                    fish: "ماهی",
+                    breakfast: "صبحانه",
+                    juice: "آبمیوه طبیعی",
+                    steak: "استیک",
+                    soup: "سوپ",
+                    fastfood: "فست فود"
+                }
             }
+        },
+        mounted() {
+            fetch("http://demo2469824.mockable.io/best-restaurants")
+                .then(response => response.json())
+                .then((data) => {
+                    this.restaurants = data.restaurants;
+                })
         }
     }
 </script>

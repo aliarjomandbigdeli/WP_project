@@ -1,39 +1,16 @@
 <template>
     <div id="app">
-        <MyHeader></MyHeader>
-
-        <SearchContainer></SearchContainer>
-        <GuidanceDiv></GuidanceDiv>
-        <BestOfMonth></BestOfMonth>
-        <BestRestaurants></BestRestaurants>
-        <FoodsDiv></FoodsDiv>
-        <ContactDiv></ContactDiv>
-
-        <MyFooter></MyFooter>
+        <Home></Home>
     </div>
 </template>
 
 <script>
-    import MyHeader from './components/MyHeader.vue'
-    import MyFooter from "@/components/MyFooter";
-    import SearchContainer from "@/components/SearchContainer";
-    import GuidanceDiv from "@/components/GuidanceDiv";
-    import BestOfMonth from "@/components/BestOfMonth";
-    import BestRestaurants from "@/components/BestRestaurants";
-    import FoodsDiv from "@/components/FoodsDiv";
-    import ContactDiv from "@/components/ContactDiv";
+    import Home from "@/Home";
 
     export default {
         name: 'app',
         components: {
-            ContactDiv,
-            FoodsDiv,
-            BestRestaurants,
-            BestOfMonth,
-            GuidanceDiv,
-            SearchContainer,
-            MyFooter,
-            MyHeader
+            Home,
         }
     }
 </script>

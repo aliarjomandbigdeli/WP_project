@@ -9,14 +9,15 @@
             منطقه
             خود را وارد کنید.</p></div>
         <div class="order-div-items" id="search-bar-div">
-            <select name="citySel" id="city-sel">
+            <select name="citySel" id="city-sel" v-model="city">
                 <option value="تهران">تهران</option>
                 <option value="اصفهان">اصفهان</option>
                 <option value="شیراز">شیراز</option>
                 <option value="مشهد">مشهد</option>
             </select>
             <div id="search-input">
-                <input list="districts" name="district" placeholder="مثلا نیاوران" dir="rtl" @keyup.enter="onSubmit">
+                <input list="districts" name="district" placeholder="مثلا نیاوران" dir="rtl" v-model="district"
+                       @keyup.enter="onSubmit">
                 <datalist id="districts">
                     <option>&#128205;جستجو خودکار منطقه شما</option>
                     <!--                    <option value="&#128205;جستجو خودکار منطقه شما">&#128205;جستجو خودکار منطقه شما</option>-->
@@ -53,9 +54,15 @@
 
     export default {
         name: "SearchContainer",
-        methods:{
-            onSubmit(){
-                router.push({ name: "SearchPage" });
+        data() {
+            return {
+                city: "",
+                district: ""
+            }
+        },
+        methods: {
+            onSubmit() {
+                router.push({name: "SearchPage", params: {city: this.city, district: this.district}});
             }
         }
     }

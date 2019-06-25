@@ -19,7 +19,7 @@ export default new Router({
             component: Home
         },
         {
-            path: '/search',
+            path: '/search/:city/district/:district',
             name: 'SearchPage',
             component: SearchPage
         }

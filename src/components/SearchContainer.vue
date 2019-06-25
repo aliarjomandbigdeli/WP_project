@@ -24,8 +24,8 @@
                 </datalist>
                 <div id="location-icon"><i class="fas fa-map-marker-alt"></i></div>
             </div>
-            <a href="">
-                <div class="search-bar-items" id="search-btn-icon-div">
+            <a>
+                <div class="search-bar-items" @click="onSubmit" id="search-btn-icon-div">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 18 18">
                         <g fill="none" fill-rule="evenodd">

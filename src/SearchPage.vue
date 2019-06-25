@@ -13,12 +13,14 @@
         </div>
         <div id="result-container">
             <div id="results">
-                <InfoBoxSmall v-for="detail in restaurants" :key="detail.name"
-                              :name="detail.name"
-                              :rate="detail.rate"
-                              :foods="detail.foods"
-                              :address="detail.address"
-                              :imgUrl="detail.imgUrl"></InfoBoxSmall>
+                <router-link v-for="detail in restaurants" :key="detail.name"
+                             :to="{ name: 'RestaurantPage', params: { id: detail.id } }">
+                    <InfoBoxSmall :name="detail.name"
+                                  :rate="detail.rate"
+                                  :foods="detail.foods"
+                                  :address="detail.address"
+                                  :imgUrl="detail.imgUrl"></InfoBoxSmall>
+                </router-link>
             </div>
             <div id="filter-checkbox">
                 <div id="filter-checkbox-title">فیلتر بر اساس نوع غذا</div>

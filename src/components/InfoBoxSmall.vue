@@ -56,6 +56,7 @@
 
     #main-frame{
         box-shadow: 0 0 3px lightgray;
+        background-color: white;
     }
 
     #main-frame:hover {

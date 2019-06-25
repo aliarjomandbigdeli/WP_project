@@ -21,10 +21,10 @@
                               :imgUrl="detail.imgUrl"></InfoBoxSmall>
             </div>
             <div id="filter-checkbox">
-                <div>فیلتر بر اساس نوع غذا</div>
-                <input name="kind-food" placeholder="جستجوی دسته بندی غذاها"/>
+                <div id="filter-checkbox-title">فیلتر بر اساس نوع غذا</div>
+                <input id="kind-input" name="kind-food" placeholder="جستجوی دسته بندی غذاها"/>
                 <div v-for="kind in foodKinds" :key="kind">
-                    <div id="kind-item">{{dictionary[kind]}}<input type="checkbox"></div>
+                    <div id="kind-item"><input type="checkbox" :value="kind">{{dictionary[kind]}}</div>
                 </div>
             </div>
         </div>
@@ -113,7 +113,6 @@
         padding: 15px 50px 10px 5px;
         display: flex;
         justify-content: flex-end;
-        /*max-width: 150px;*/
     }
 
     #search-input {
@@ -121,8 +120,6 @@
         border-radius: 5px;
         border: 1px solid lightgray;
         background-color: #fafafa;
-        /*width: 50%;*/
-
         align-content: flex-end;
         justify-content: flex-end;
         align-items: flex-end;
@@ -134,10 +131,7 @@
         border-bottom-right-radius: 5px;
         padding: 5px;
         background-color: #fafafa;
-        /*width: 100%;*/
         font-size: 1em;
-        /*size: 10px;*/
-        /*max*/
     }
 
     #search-input > input:focus {
@@ -158,10 +152,39 @@
     #result-container {
         display: flex;
         justify-content: flex-end;
+        padding: 50px 20px 10px 10px;
+        background-color: #fafafa;
     }
 
     #filter-checkbox {
         direction: rtl;
+        border-radius: 5px;
+        border-color: lightgray;
+        border-style: solid;
+        border-width: 1px;
+        background-color: white;
+        padding: 5px;
+    }
+
+    #filter-checkbox-title{
+        font-size: .7em;
+    }
+
+    #filter-checkbox > * {
+        /*margin: 7px 5px 7px 5px;*/
+        margin: 5px;
+        /*padding: 5px;*/
+    }
+
+    #kind-input {
+        border-radius: 5px;
+        border-width: 1px;
+        margin: 5px 10px 5px 10px;
+        /*opacity: 0;*/
+        /*cursor: pointer;*/
+        /*height: 0;*/
+        /*width: 0;*/
+
     }
 
     #kind-item {
@@ -169,15 +192,30 @@
         border-bottom-style: solid;
         border-bottom-width: 1px;
         padding: 5px;
+        margin: 5px;
     }
 
-    #results{
+    #kind-item:hover {
+        background-color: lightgray;
+    }
+
+    #kind-item > input {
+        background-color: white;
+        font-size: 1.2em;
+        /*opacity: 0;*/
+        border-width: 1px;
+        border-radius: 5px;
+        border-style: solid;
+        border-color: lightgray;
+    }
+
+    #results {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
     }
 
-    #results > *{
+    #results > * {
         margin: 15px 5px 15px 5px;
     }
 

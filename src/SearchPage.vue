@@ -46,6 +46,7 @@
                 number: 0,
                 city: "",
                 district: "",
+                query: "",
                 foodKinds: [
                     'sandwich',
                     'burger',
@@ -82,9 +83,11 @@
         created() {
             this.city = this.$route.params.city;
             this.district = this.$route.params.district;
+            this.query = "best-restaurants";
         },
         mounted() {
-            fetch("http://demo2469824.mockable.io/best-restaurants")
+            // fetch("http://demo2469824.mockable.io/best-restaurants")
+            fetch("http://demo2469824.mockable.io/".concat(this.query))
                 .then(response => response.json())
                 .then((data) => {
                     this.restaurants = data.restaurants;
@@ -166,7 +169,7 @@
         padding: 5px;
     }
 
-    #filter-checkbox-title{
+    #filter-checkbox-title {
         font-size: .7em;
     }
 
@@ -180,6 +183,7 @@
         border-radius: 5px;
         border-width: 1px;
         margin: 5px 10px 5px 10px;
+        background-color: #fafafa;
         /*opacity: 0;*/
         /*cursor: pointer;*/
         /*height: 0;*/

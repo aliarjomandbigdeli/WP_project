@@ -39,10 +39,4 @@
 </script>
 
 <style>
-    /* Responsive layout - when the screen is less than 900px wide, hide sms-img */
-    @media screen and (max-width: 1050px) {
-        #sms-img {
-            display: none;
-        }
-    }
 </style>

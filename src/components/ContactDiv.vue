@@ -62,6 +62,13 @@
 </script>
 
 <style scoped>
+    /* Responsive layout - when the screen is less than 900px wide, hide sms-img */
+    @media screen and (max-width: 1050px) {
+        #sms-img {
+            display: none;
+        }
+    }
+
     #sms-div {
         background-color: var(--main-bg-color);
         padding-top: 250px;

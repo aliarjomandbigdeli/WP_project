@@ -2,7 +2,6 @@
     <div id="SearchPage">
         <MyHeader></MyHeader>
         <div id="search-banner"></div>
-        <div>{{checked}}</div>
         <div id="loc-search-p" dir="rtl">
             {{number}}<span> رستوران امکان سرویس دهی به </span><span class="bold">{{city}}، {{district}}</span><span> را دارند</span>
         </div>
@@ -28,20 +27,19 @@
                 <input id="kind-input" name="kind-food" placeholder="جستجوی دسته بندی غذاها"/>
 
                 <div v-for="(kind, index) in foodKinds" :key="index">
-                    <div class="kind-item">
-                        <md-checkbox :value="kind" v-if="true" v-model="checked" radio-value="filled">
+                    <div class="kind-item" v-if="checked.includes(kind)">
+                        <md-checkbox :value="kind" v-model="checked" radio-value="filled">
                             &nbsp;{{dictionary[kind]}}
                         </md-checkbox>
                     </div>
                 </div>
-                <!--                <div v-for="(kind, index) in foodKinds" :key="index">-->
-                <!--                    <div class="kind-item">-->
-                <!--                        <md-checkbox :value="kind" v-if="!checked.contains(kind)" v-model="checked" radio-value="filled">-->
-                <!--                            &nbsp;{{dictionary[kind]}}-->
-                <!--                        </md-checkbox>-->
-                <!--                        <div class="item-border" v-if="!checked.contains(kind)"></div>-->
-                <!--                    </div>-->
-                <!--                </div>-->
+                <div v-for="(kind, index) in foodKinds" :key="index">
+                    <div class="kind-item" v-if="!checked.includes(kind)">
+                        <md-checkbox :value="kind" v-model="checked" radio-value="filled">
+                            &nbsp;{{dictionary[kind]}}
+                        </md-checkbox>
+                    </div>
+                </div>
             </div>
         </div>
         <MyFooter></MyFooter>

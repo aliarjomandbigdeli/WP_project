@@ -2,6 +2,7 @@
     <div id="SearchPage">
         <MyHeader></MyHeader>
         <div id="search-banner"></div>
+<!--        <div>checked:{{checked}},input:{{inputTxtCheckbox}},key:{{findKey(inputTxtCheckbox,checked)}}</div>-->
         <div id="loc-search-p" dir="rtl">
             {{number}}<span> رستوران امکان سرویس دهی به </span><span class="bold">{{city}}، {{district}}</span><span> را دارند</span>
         </div>
@@ -24,17 +25,19 @@
             </div>
             <div id="filter-checkboxes">
                 <div id="filter-checkbox-title">فیلتر بر اساس نوع غذا</div>
-                <input id="kind-input" name="kind-food" placeholder="جستجوی دسته بندی غذاها"/>
-
+                <input id="kind-input" v-model="inputTxtCheckbox" @keyup.enter="changeCheckbox" name="kind-food"
+                       placeholder="جستجوی دسته بندی غذاها"/>
                 <div v-for="(kind, index) in foodKinds" :key="index">
                     <div class="kind-item" v-if="checked.includes(kind)">
                         <md-checkbox :value="kind" v-model="checked" radio-value="filled">
+                            <!--                        <md-checkbox :value="kind" v-model="checked" radio-value="filled" @change="changeCheckbox">-->
                             &nbsp;{{dictionary[kind]}}
                         </md-checkbox>
                     </div>
                 </div>
                 <div v-for="(kind, index) in foodKinds" :key="index">
                     <div class="kind-item" v-if="!checked.includes(kind)">
+                        <!--                        <md-checkbox :value="kind" v-model="checked" radio-value="filled" @change="changeCheckbox">-->
                         <md-checkbox :value="kind" v-model="checked" radio-value="filled">
                             &nbsp;{{dictionary[kind]}}
                         </md-checkbox>
@@ -63,6 +66,7 @@
                 district: "",
                 query: "",
                 checked: [],
+                inputTxtCheckbox: "",
                 foodKinds: [
                     'sandwich',
                     'burger',
@@ -108,6 +112,22 @@
                 .then((data) => {
                     this.restaurants = data.restaurants;
                 })
+        },
+
+        methods: {
+            changeCheckbox() {
+                if (!this.checked.includes(this.inputTxtCheckbox) && this.foodKinds.includes(this.inputTxtCheckbox))
+                    this.checked.push(this.inputTxtCheckbox);
+            },
+            findKey(whatever, object) {
+                // for (let key in object) {
+                for (let key in Object.keys(object)) {
+                    if (object[key] === whatever) {
+                        return key;
+                    }
+                }
+                return null;
+            }
         }
     }
 </script>

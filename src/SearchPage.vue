@@ -2,19 +2,20 @@
     <div id="SearchPage">
         <MyHeader></MyHeader>
         <div id="search-banner"></div>
-<!--        <div>checked:{{checked}},input:{{inputTxtCheckbox}},key:{{findKey(inputTxtCheckbox,checked)}}</div>-->
+        <div>checked:{{checked}},input:{{inputTxtCheckbox}},key:{{findKey(inputTxtCheckbox,checked)}}</div>
         <div id="loc-search-p" dir="rtl">
             {{number}}<span> رستوران امکان سرویس دهی به </span><span class="bold">{{city}}، {{district}}</span><span> را دارند</span>
         </div>
         <div id="search-div">
             <div id="search-input">
-                <input name="rest-name" size="40" placeholder="جستجوی رستوران در این محدوده" dir="rtl">
+                <input name="rest-name" size="40" v-model="restName"
+                       placeholder="جستجوی رستوران در این محدوده" dir="rtl">
                 <div id="location-icon"><i class="fas fa-search"></i></div>
             </div>
         </div>
         <div id="result-container">
             <div id="results">
-                <router-link v-for="detail in restaurants" :key="detail.name"
+                <router-link v-for="detail in filteredRestaurant" :key="detail.name"
                              :to="{ name: 'RestaurantPage', params: { id: detail.id } }">
                     <InfoBoxSmall :name="detail.name"
                                   :rate="detail.rate"
@@ -67,6 +68,7 @@
                 query: "",
                 checked: [],
                 inputTxtCheckbox: "",
+                restName: "",
                 foodKinds: [
                     'sandwich',
                     'burger',
@@ -84,19 +86,34 @@
                 ],
                 restaurants: [],
                 dictionary: {
-                    sandwich: "ساندویچ",
-                    burger: "برگر",
-                    pizza: "پیتزا",
-                    kebab: "کباب",
-                    salad: "سالاد",
-                    iranian: "ایرانی",
-                    pasta: "پاستا",
-                    fish: "ماهی",
-                    breakfast: "صبحانه",
-                    juice: "آبمیوه طبیعی",
-                    steak: "استیک",
-                    soup: "سوپ",
-                    fastfood: "فست فود"
+                    "sandwich": "ساندویچ",
+                    "burger": "برگر",
+                    "pizza": "پیتزا",
+                    "kebab": "کباب",
+                    "salad": "سالاد",
+                    "iranian": "ایرانی",
+                    "pasta": "پاستا",
+                    "fish": "ماهی",
+                    "breakfast": "صبحانه",
+                    "juice": "آبمیوه طبیعی",
+                    "steak": "استیک",
+                    "soup": "سوپ",
+                    "fastfood": "فست فود"
+                },
+                dictionaryReverse: {
+                    "ساندویچ": "sandwich",
+                    "برگر": "burger",
+                    "پیتزا": "pizza",
+                    "کباب": "kebab",
+                    "سالاد": "salad",
+                    "ایرانی": "iranian",
+                    "پاستا": "pasta",
+                    "ماهی": "fish",
+                    "صبحانه": "breakfast",
+                    "آبمیوه طبیعی": "juice",
+                    "استیک": "steak",
+                    "سوپ": "soup",
+                    "فست فود": "fastfood",
                 }
             }
         },
@@ -113,9 +130,17 @@
                     this.restaurants = data.restaurants;
                 })
         },
-
+        computed: {
+            filteredRestaurant: function () {
+                return this.restaurants.filter((restaurant) => {
+                    return restaurant.name.match(this.restName);
+                })
+            }
+        },
         methods: {
             changeCheckbox() {
+                // if (!this.checked.includes(this.inputTxtCheckbox) && this.foodKinds.includes(this.inputTxtCheckbox))
+                // this.inputTxtCheckbox = this.dictionaryReverse(this.inputTxtCheckbox);
                 if (!this.checked.includes(this.inputTxtCheckbox) && this.foodKinds.includes(this.inputTxtCheckbox))
                     this.checked.push(this.inputTxtCheckbox);
             },
@@ -123,7 +148,8 @@
                 // for (let key in object) {
                 for (let key in Object.keys(object)) {
                     if (object[key] === whatever) {
-                        return key;
+                        return Object.keys(object);
+                        // return key;
                     }
                 }
                 return null;
@@ -220,6 +246,8 @@
         border-width: 1px;
         margin: 5px 10px 5px 10px;
         background-color: #fafafa;
+        line-height: 1.8;
+        outline-width: 0;
     }
 
 

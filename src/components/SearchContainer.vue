@@ -9,12 +9,15 @@
             منطقه
             خود را وارد کنید.</p></div>
         <div class="order-div-items" id="search-bar-div">
-            <select name="citySel" id="city-sel" v-model="city">
-                <option value="تهران">تهران</option>
-                <option value="اصفهان">اصفهان</option>
-                <option value="شیراز">شیراز</option>
-                <option value="مشهد">مشهد</option>
-            </select>
+            <vue-dropdown id="city-sel" :config="config"
+                          @setSelectedOption="setNewSelectedOption($event)"></vue-dropdown>
+
+<!--            <select name="citySel" id="city-sel" v-model="city">-->
+<!--                <option value="تهران">تهران</option>-->
+<!--                <option value="اصفهان">اصفهان</option>-->
+<!--                <option value="شیراز">شیراز</option>-->
+<!--                <option value="مشهد">مشهد</option>-->
+<!--            </select>-->
             <div id="search-input">
                 <input list="districts" name="district" placeholder="مثلا نیاوران" dir="rtl" v-model="district"
                        @keyup.enter="onSubmit">
@@ -51,18 +54,48 @@
 
 <script>
     import router from '../router'
+    import VueDropdown from 'vue-dynamic-dropdown'
 
     export default {
         name: "SearchContainer",
+        components: {
+            VueDropdown
+        },
         data() {
             return {
                 city: "",
-                district: ""
+                district: "",
+                config: {
+                    options: [
+                        {
+                            value: "تهران"
+                        },
+                        {
+                            value: "اصفهان"
+                        },
+                        {
+                            value: "مشهد"
+                        },
+                        {
+                            value: "شیراز"
+                        },
+                    ],
+                    placeholder: "شهر",
+                    backgroundColor: "#cde4f5",
+                    textColor: "black",
+                    borderRadius: "1.1em",
+                    border: "1px solid gray",
+                    width: 140,
+                }
             }
         },
         methods: {
             onSubmit() {
                 router.push({name: "SearchPage", params: {city: this.city, district: this.district}});
+            },
+            setNewSelectedOption(selectedOption) {
+                this.config.placeholder = selectedOption.value;
+                this.city = selectedOption.value;
             }
         }
     }
@@ -75,6 +108,7 @@
         align-items: center;
         text-align: center;
         background-image: url("../../mocks/pizza.png");
+        max-height: 513px;
     }
 
     .order-div-items {
@@ -86,7 +120,7 @@
         flex-direction: row-reverse;
         padding: 10px;
         border-radius: 10px;
-        background-color: white;
+        /*background-color: white;*/
         width: 50%;
         min-width: 430px;
     }
@@ -98,6 +132,8 @@
         margin-left: 5px;
         padding-left: 10px;
         border-color: lightgray;
+
+        padding-top: 10px;
     }
 
     #search-input {
@@ -106,6 +142,7 @@
         border-top-right-radius: 10px;
         border: 1px solid lightgray;
         width: 100%;
+        max-height: 64px;
     }
 
     #search-input > input {

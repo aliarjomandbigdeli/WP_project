@@ -10,7 +10,9 @@
                                  :show-rating="false"></star-rating>
                 </div>
                 <div class="foods detail">
-                    <span v-for="food in foods" :key="food">&#9679; {{dictionary[food]}}</span>
+                    <span v-for="(food, index) in foods" :key="index">
+                        <span v-if="index!=0">&#9679;</span> {{dictionary[food]}}
+                    </span>
                 </div>
                 <div class="address detail">{{address}}</div>
             </div>
@@ -54,7 +56,7 @@
 
 <style scoped>
 
-    #main-frame{
+    #main-frame {
         box-shadow: 0 0 3px lightgray;
         background-color: white;
     }
@@ -90,8 +92,8 @@
         padding: 0 5px 0px 5px;
         text-align: center;
         width: 100%;
+        color: black;
     }
-
 
     .detail {
         /*color: gray;*/

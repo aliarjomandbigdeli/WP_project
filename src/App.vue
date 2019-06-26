@@ -26,10 +26,6 @@
     }
 
     a {
-        color: black;
-    }
-
-    a {
         text-decoration: none !important
     }
 

@@ -9,7 +9,9 @@
             &nbsp;<span class="rate-number">{{rate}}</span>&nbsp;-----
         </div>
         <p class="foods">
-            <span v-for="food in foods" :key="food">&#9679; {{dictionary[food]}}</span>
+            <span v-for="(food, index) in foods" :key="index">
+                <span v-if="index!=0">&#9679;</span> {{dictionary[food]}}
+            </span>
         </p>
         <p class="address">{{address}}</p>
         <div class="order-bst-rest-btn">شروع سفارش</div>
@@ -57,7 +59,7 @@
         text-align: center;
         height: 365px;
         box-shadow: 0 0 3px lightgray;
-        color: black !important;
+        color: black;
     }
 
     .best-month-div-items:hover {

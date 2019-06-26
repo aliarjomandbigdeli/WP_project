@@ -20,11 +20,17 @@
                     </p>
                     <p class="address">{{restaurant.address}}</p>
                 </div>
-                <div id="tab-div">
-                    <div id="rest-menu">منوی رستوران</div>
-                    <div id="rest-info">اطلاعات رستوران</div>
-                    <div id="rest-review">نظرات کاربران</div>
-                </div>
+
+                <scrollactive id="top-nav" active-class="-active">
+                    <a href="#one" class="scrollactive-item">منوی رستوران</a>
+                    <a href="#two" class="scrollactive-item">اطلاعات رستوران</a>
+                    <a href="#three" class="scrollactive-item">نظرات کاربران</a>
+                </scrollactive>
+                <!--                <div id="tab-div">-->
+                <!--                    <div id="rest-menu">منوی رستوران</div>-->
+                <!--                    <div id="rest-info">اطلاعات رستوران</div>-->
+                <!--                    <div id="rest-review">نظرات کاربران</div>-->
+                <!--                </div>-->
             </div>
             <div id="show-detail">
                 <div></div>
@@ -38,11 +44,14 @@
 
 <script>
     import StarRating from 'vue-star-rating'
+    // import scrollactive from 'vue-scrollactive'
+    // import VueScrollactive from 'vue-scrollactive'
     import MyHeader from "@/components/MyHeader";
     import MyFooter from "@/components/MyFooter";
 
     export default {
         name: "RestaurantPage",
+        // components: {MyFooter, MyHeader, StarRating,VueScrollactive},
         components: {MyFooter, MyHeader, StarRating},
         data() {
             return {
@@ -69,6 +78,9 @@
         created() {
             this.id = this.$route.params.id;
             this.query = "best-restaurants";
+
+            window.onscroll = this.myFunction;
+
         },
         mounted() {
             // fetch("http://demo2469824.mockable.io/best-restaurants")
@@ -77,6 +89,17 @@
                 .then((data) => {
                     this.restaurant = data.restaurants[0];
                 })
+        },
+        methods: {
+            myFunction() {
+                let header = document.getElementById("top-nav");
+                let sticky = header.offsetTop;
+                if (window.pageYOffset > sticky) {
+                    header.classList.add("sticky");
+                } else {
+                    header.classList.remove("sticky");
+                }
+            }
         }
     }
 </script>
@@ -161,12 +184,12 @@
         color: gray;
     }
 
-    #tab-div{
+    #top-nav {
         display: flex;
         justify-content: space-around;
         /*position: fixed;*/
         background-color: white;
-        /*max-width: 734px;*/
+        max-width: 734px;
         /*width: 100%;*/
 
         padding: 10px;
@@ -175,6 +198,20 @@
         border-top-width: 1px;
 
 
+    }
+
+    #top-nav > a {
+        color: black !important;
+    }
+
+    .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+
+    .sticky + .content {
+        padding-top: 102px;
     }
 
 </style>

@@ -57,6 +57,7 @@
         text-align: center;
         height: 365px;
         box-shadow: 0 0 3px lightgray;
+        color: black !important;
     }
 
     .best-month-div-items:hover {

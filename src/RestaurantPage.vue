@@ -7,18 +7,28 @@
             <div id="empty-div"></div>
             <div id="show-div">
                 <div id="info-div">
-                    <h2>{{restaurant.name}}</h2>
+                    <h1>{{restaurant.name}}</h1>
                     <div class="stars-bar">
-                        ----- (<span class="rate-participant">{{restaurant.numOfRates}}</span>)
+                        <span class="rate-number">{{restaurant.rate}}</span>&nbsp;
                         <star-rating :rating="restaurant.rate" :read-only="true" :increment="0.01" :star-size="20"
                                      :show-rating="false"></star-rating>
-                        &nbsp;<span class="rate-number">{{restaurant.rate}}</span>&nbsp;-----
+                        <span class="rate-participant">({{restaurant.numOfRates}})</span>
                     </div>
                     <p class="foods">
-                        <span v-for="food in restaurant.foods" :key="food">&#9679; {{dictionary[food]}}</span>
+                        <span v-for="(food,index) in restaurant.foods" :key="index"><span
+                                v-if="index!=0">&#9679;</span> {{dictionary[food]}}</span>
                     </p>
                     <p class="address">{{restaurant.address}}</p>
                 </div>
+                <div id="tab-div">
+                    <div id="rest-menu">منوی رستوران</div>
+                    <div id="rest-info">اطلاعات رستوران</div>
+                    <div id="rest-review">نظرات کاربران</div>
+                </div>
+            </div>
+            <div id="show-detail">
+                <div></div>
+                <div id="food-set-nav"></div>
             </div>
         </div>
 
@@ -98,7 +108,7 @@
         display: flex;
         /*display: inline-block;*/
         position: absolute;
-        left: 48%;
+        left: 47%;
         /*marign-left: auto;*/
         /*margin-right: auto;*/
         top: 100px;
@@ -118,14 +128,19 @@
         width: 100%;
         height: 150px;
     }
-    #show-div{
+
+    #show-div {
         display: inline-block;
         background-color: white;
-        width: 50%;
-        padding-top: 15px;
+        max-width: 744px;
+        width: 100%;
+        /*padding: 15px 10px 5px 10px;*/
+        padding: 15px 0px 5px 0px;
+
+        box-shadow: 0 0 3px lightgray;
     }
 
-    #info-div{
+    #info-div {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -134,8 +149,32 @@
 
     }
 
-    .stars-bar{
+    .stars-bar {
         display: flex;
+    }
+
+    .rate-number {
+        color: orange;
+    }
+
+    .address, .rate-participant {
+        color: gray;
+    }
+
+    #tab-div{
+        display: flex;
+        justify-content: space-around;
+        /*position: fixed;*/
+        background-color: white;
+        /*max-width: 734px;*/
+        /*width: 100%;*/
+
+        padding: 10px;
+        border-top-color: lightgray;
+        border-top-style: solid;
+        border-top-width: 1px;
+
+
     }
 
 </style>

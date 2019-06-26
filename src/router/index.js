@@ -4,6 +4,12 @@ import Home from '@/Home'
 import SearchPage from '@/SearchPage'
 import RestaurantPage from '@/RestaurantPage'
 
+import MdCheckbox from 'vue-material'
+import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/default.css'
+
+Vue.use(MdCheckbox)
+
 Vue.use(Router)
 
 export default new Router({

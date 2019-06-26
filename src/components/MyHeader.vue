@@ -34,11 +34,11 @@
     }
 
     .nav-bar-items > a {
-        color: #4a5575;
+        color: #4a5575 !important
     }
 
     .nav-bar-items > a:hover {
-        color: var(--btn-bg-or-highlighted-color);
+        color: var(--btn-bg-or-highlighted-color) !important
     }
 
     #separator {

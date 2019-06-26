@@ -26,8 +26,15 @@
     }
 
     a {
-        text-decoration: none;
         color: black;
+    }
+
+    a {
+        text-decoration: none !important
+    }
+
+    a:hover {
+        text-decoration: none !important
     }
 
     * {

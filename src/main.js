@@ -3,6 +3,6 @@ import App from './App'
 import router from './router'
 
 new Vue({
-  router: router,
-  render: h => h(App)
+    router: router,
+    render: h => h(App)
 }).$mount('#app');

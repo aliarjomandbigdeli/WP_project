@@ -2,6 +2,7 @@
     <div id="SearchPage">
         <MyHeader></MyHeader>
         <div id="search-banner"></div>
+        <div>{{checked}}</div>
         <div id="loc-search-p" dir="rtl">
             {{number}}<span> رستوران امکان سرویس دهی به </span><span class="bold">{{city}}، {{district}}</span><span> را دارند</span>
         </div>
@@ -22,12 +23,25 @@
                                   :imgUrl="detail.imgUrl"></InfoBoxSmall>
                 </router-link>
             </div>
-            <div id="filter-checkbox">
+            <div id="filter-checkboxes">
                 <div id="filter-checkbox-title">فیلتر بر اساس نوع غذا</div>
                 <input id="kind-input" name="kind-food" placeholder="جستجوی دسته بندی غذاها"/>
-                <div v-for="kind in foodKinds" :key="kind">
-                    <div id="kind-item"><input type="checkbox" :value="kind">{{dictionary[kind]}}</div>
+
+                <div v-for="(kind, index) in foodKinds" :key="index">
+                    <div class="kind-item">
+                        <md-checkbox :value="kind" v-if="true" v-model="checked" radio-value="filled">
+                            &nbsp;{{dictionary[kind]}}
+                        </md-checkbox>
+                    </div>
                 </div>
+                <!--                <div v-for="(kind, index) in foodKinds" :key="index">-->
+                <!--                    <div class="kind-item">-->
+                <!--                        <md-checkbox :value="kind" v-if="!checked.contains(kind)" v-model="checked" radio-value="filled">-->
+                <!--                            &nbsp;{{dictionary[kind]}}-->
+                <!--                        </md-checkbox>-->
+                <!--                        <div class="item-border" v-if="!checked.contains(kind)"></div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
             </div>
         </div>
         <MyFooter></MyFooter>
@@ -40,6 +54,7 @@
     import MyFooter from "@/components/MyFooter";
     import InfoBoxSmall from "@/components/InfoBoxSmall";
 
+
     export default {
         name: "SearchPage",
         components: {InfoBoxSmall, MyFooter, MyHeader},
@@ -49,6 +64,7 @@
                 city: "",
                 district: "",
                 query: "",
+                checked: [],
                 foodKinds: [
                     'sandwich',
                     'burger',
@@ -108,6 +124,7 @@
         text-align: right;
         padding: 10px 50px 10px 10px;
         font-size: 1.4em;
+        background-color: white;
     }
 
     .bold {
@@ -118,6 +135,7 @@
         padding: 15px 50px 10px 5px;
         display: flex;
         justify-content: flex-end;
+        background-color: white;
     }
 
     #search-input {
@@ -161,24 +179,22 @@
         background-color: #fafafa;
     }
 
-    #filter-checkbox {
+    #filter-checkboxes {
         direction: rtl;
         border-radius: 5px;
         border-color: lightgray;
         border-style: solid;
         border-width: 1px;
         background-color: white;
-        padding: 5px;
     }
 
     #filter-checkbox-title {
         font-size: .7em;
-    }
-
-    #filter-checkbox > * {
-        /*margin: 7px 5px 7px 5px;*/
-        margin: 5px;
-        /*padding: 5px;*/
+        padding: 5px;
+        border-bottom-color: lightgray;
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+        margin-bottom: 5px;
     }
 
     #kind-input {
@@ -186,33 +202,22 @@
         border-width: 1px;
         margin: 5px 10px 5px 10px;
         background-color: #fafafa;
-        /*opacity: 0;*/
-        /*cursor: pointer;*/
-        /*height: 0;*/
-        /*width: 0;*/
-
     }
 
-    #kind-item {
+
+    .kind-item {
         border-bottom-color: lightgray;
         border-bottom-style: solid;
         border-bottom-width: 1px;
-        padding: 5px;
-        margin: 5px;
+        padding-top: 5px;
     }
 
-    #kind-item:hover {
+    .kind-item:hover {
         background-color: lightgray;
     }
 
-    #kind-item > input {
-        background-color: white;
-        font-size: 1.2em;
-        /*opacity: 0;*/
-        border-width: 1px;
-        border-radius: 5px;
-        border-style: solid;
-        border-color: lightgray;
+    .md-checkbox {
+        display: flex;
     }
 
     #results {

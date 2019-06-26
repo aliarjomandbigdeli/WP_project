@@ -15,7 +15,6 @@
 <script>
     export default {
         name: "BestRestaurants",
-
         data() {
             return {
                 restaurants: [],
@@ -64,6 +63,10 @@
         grid-gap: 60px;
         text-align: center;
         font-size: 0.85em;
+    }
+
+    .grid-item{
+        color: black !important;
     }
 
     .grid-item > div > img:hover {

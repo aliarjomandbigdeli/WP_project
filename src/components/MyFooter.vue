@@ -97,7 +97,7 @@
     }
 
     .footer-items > a {
-        color: #939b89;
+        color: #939b89 !important;
         margin: 3px;
     }
 
@@ -131,7 +131,7 @@
     }
 
     #rest-list {
-        color: #5890ff;
+        color: #5890ff !important;
     }
 
     #enamad-div {

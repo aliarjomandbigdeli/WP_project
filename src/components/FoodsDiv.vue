@@ -152,6 +152,7 @@
 
     .more-food-items {
         /*margin: 10px;*/
+        color: black !important;
         padding: 12px;
         border-radius: 20px;
         background-color: white;

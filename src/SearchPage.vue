@@ -14,33 +14,46 @@
             </div>
         </div>
         <div id="result-container">
-            <div id="results">
-                <router-link v-for="restaurant in restaurants" :key="restaurant.name"
-                             :to="{ name: 'RestaurantPage', params: { id: restaurant.id } }">
-                    <InfoBoxSmall :name="restaurant.name"
-                                  :rate="restaurant.averageRate"
-                                  :categories="restaurant.categories"
-                                  :address="restaurant.address.addressLine"
-                                  :imgUrl="restaurant.logo"></InfoBoxSmall>
-                </router-link>
+            <div id="results-div">
+                <div class="result-div">
+                    <router-link v-for="restaurant in openFilteredRestaurant" :key="restaurant.name"
+                                 :to="{ name: 'RestaurantPage', params: { id: restaurant.id } }">
+                        <InfoBoxSmall :name="restaurant.name"
+                                      :rate="restaurant.averageRate"
+                                      :categories="restaurant.categories"
+                                      :address="restaurant.address.addressLine"
+                                      :imgUrl="restaurant.logo"></InfoBoxSmall>
+                    </router-link>
+                </div>
+                <h2 id="closed-title">رستوران های بسته</h2>
+                <div class="result-div">
+                    <router-link v-for="restaurant in closedFilteredRestaurant" :key="restaurant.name"
+                                 :to="{ name: 'RestaurantPage', params: { id: restaurant.id } }">
+                        <InfoBoxSmall :name="restaurant.name"
+                                      :rate="restaurant.averageRate"
+                                      :categories="restaurant.categories"
+                                      :address="restaurant.address.addressLine"
+                                      :imgUrl="restaurant.logo"></InfoBoxSmall>
+                    </router-link>
+                </div>
             </div>
             <div id="filter-checkboxes">
                 <div id="filter-checkbox-title">فیلتر بر اساس نوع غذا</div>
                 <input id="kind-input" v-model="inputTxtCheckbox" @keyup.enter="changeCheckbox" name="kind-food"
                        placeholder="جستجوی دسته بندی غذاها"/>
-                <div v-for="(kind, index) in foodKinds" :key="index">
+                <div v-for="(kind, index) in categories" :key="index">
                     <div class="kind-item" v-if="checked.includes(kind)">
                         <md-checkbox :value="kind" v-model="checked" radio-value="filled">
                             <!--                        <md-checkbox :value="kind" v-model="checked" radio-value="filled" @change="changeCheckbox">-->
-                            &nbsp;{{dictionary[kind]}}
+                            &nbsp;{{kind}}
                         </md-checkbox>
                     </div>
                 </div>
-                <div v-for="(kind, index) in foodKinds" :key="index">
+                <div v-for="(kind, index) in categories" :key="index">
                     <div class="kind-item" v-if="!checked.includes(kind)">
                         <!--                        <md-checkbox :value="kind" v-model="checked" radio-value="filled" @change="changeCheckbox">-->
                         <md-checkbox :value="kind" v-model="checked" radio-value="filled">
-                            &nbsp;{{dictionary[kind]}}
+                            &nbsp;{{kind}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -69,6 +82,21 @@
                 checked: [],
                 inputTxtCheckbox: "",
                 restName: "",
+                categories: [
+                    "ساندویچ",
+                    "برگر",
+                    "پیتزا",
+                    "کباب",
+                    "سالاد",
+                    "ایرانی",
+                    "پاستا",
+                    "ماهی",
+                    "صبحانه",
+                    "آبمیوه طبیعی",
+                    "استیک",
+                    "سوپ",
+                    "فست فود"
+                ],
                 foodKinds: [
                     'sandwich',
                     'burger',
@@ -100,21 +128,21 @@
                     "soup": "سوپ",
                     "fastfood": "فست فود"
                 },
-                dictionaryReverse: {
-                    "ساندویچ": "sandwich",
-                    "برگر": "burger",
-                    "پیتزا": "pizza",
-                    "کباب": "kebab",
-                    "سالاد": "salad",
-                    "ایرانی": "iranian",
-                    "پاستا": "pasta",
-                    "ماهی": "fish",
-                    "صبحانه": "breakfast",
-                    "آبمیوه طبیعی": "juice",
-                    "استیک": "steak",
-                    "سوپ": "soup",
-                    "فست فود": "fastfood",
-                }
+                dictionaryReverse: [
+                    "ساندویچ",
+                    "برگر",
+                    "پیتزا",
+                    "کباب",
+                    "سالاد",
+                    "ایرانی",
+                    "پاستا",
+                    "ماهی",
+                    "صبحانه",
+                    "آبمیوه طبیعی",
+                    "استیک",
+                    "سوپ",
+                    "فست فود",
+                ]
             }
         },
         created() {
@@ -130,9 +158,18 @@
                 })
         },
         computed: {
-            filteredRestaurant: function () {
+            openFilteredRestaurant: function () {
                 return this.restaurants.filter((restaurant) => {
-                    return restaurant.name.match(this.restName);
+                    return restaurant.name.match(this.restName) &&
+                        this.getCurrentHour() > restaurant.openingTime &&
+                        this.getCurrentHour() < restaurant.closingTime;
+                })
+            },
+            closedFilteredRestaurant: function () {
+                return this.restaurants.filter((restaurant) => {
+                    return restaurant.name.match(this.restName) &&
+                        (this.getCurrentHour() < restaurant.openingTime ||
+                        this.getCurrentHour() > restaurant.closingTime);
                 })
             }
         },
@@ -152,6 +189,10 @@
                     }
                 }
                 return null;
+            },
+            getCurrentHour() {
+                let currentDate = new Date();
+                return currentDate.getHours();
             }
         }
     }
@@ -265,13 +306,18 @@
         display: flex;
     }
 
-    #results {
+    #closed-title{
+        text-align: right;
+        padding-right: 30px;
+    }
+
+    .result-div {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
     }
 
-    #results > * {
+    .result-div > * {
         margin: 15px 5px 15px 5px;
     }
 

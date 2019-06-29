@@ -22,7 +22,8 @@
                                       :rate="restaurant.averageRate"
                                       :categories="restaurant.categories"
                                       :address="restaurant.address.addressLine"
-                                      :imgUrl="restaurant.logo"></InfoBoxSmall>
+                                      :imgUrl="restaurant.logo"
+                                      :opened="true"></InfoBoxSmall>
                     </router-link>
                 </div>
                 <h2 id="closed-title">رستوران های بسته</h2>
@@ -33,7 +34,8 @@
                                       :rate="restaurant.averageRate"
                                       :categories="restaurant.categories"
                                       :address="restaurant.address.addressLine"
-                                      :imgUrl="restaurant.logo"></InfoBoxSmall>
+                                      :imgUrl="restaurant.logo"
+                                      :opened="false"></InfoBoxSmall>
                     </router-link>
                 </div>
             </div>
@@ -161,15 +163,15 @@
             openFilteredRestaurant: function () {
                 return this.restaurants.filter((restaurant) => {
                     return restaurant.name.match(this.restName) &&
-                        this.getCurrentHour() > restaurant.openingTime &&
-                        this.getCurrentHour() < restaurant.closingTime;
+                        this.getCurrentHour() >= restaurant.openingTime &&
+                        this.getCurrentHour() <= restaurant.closingTime;
                 })
             },
             closedFilteredRestaurant: function () {
                 return this.restaurants.filter((restaurant) => {
                     return restaurant.name.match(this.restName) &&
                         (this.getCurrentHour() < restaurant.openingTime ||
-                        this.getCurrentHour() > restaurant.closingTime);
+                            this.getCurrentHour() > restaurant.closingTime);
                 })
             }
         },
@@ -306,7 +308,7 @@
         display: flex;
     }
 
-    #closed-title{
+    #closed-title {
         text-align: right;
         padding-right: 30px;
     }

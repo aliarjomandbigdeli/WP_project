@@ -1,6 +1,6 @@
 <template>
     <div id="main-frame">
-        <div id="frame">
+        <div id="frame" :class="{closedRest: !opened}">
             <div class="best-month-div-items">
 
                 <h3>{{name}}</h3>
@@ -18,7 +18,7 @@
             </div>
             <div><img height="80" width="80" :src="imgUrl"></div>
         </div>
-        <div id="order-btn-div">
+        <div v-if="opened" id="order-btn-div">
             <div id="order-bst-rest-btn">شروع سفارش</div>
         </div>
     </div>
@@ -31,7 +31,7 @@
 
         name: "InfoBoxSmall",
         components: {StarRating},
-        props: ['name', 'rate', 'categories', 'address', 'imgUrl'],
+        props: ['name', 'rate', 'categories', 'address', 'imgUrl', 'opened'],
         data() {
             return {}
         }
@@ -126,5 +126,10 @@
 
     #order-bst-rest-btn:hover {
         background-color: rgba(255, 0, 134, 0.11);
+    }
+
+
+    .closedRest {
+        background-color: lightgray;
     }
 </style>

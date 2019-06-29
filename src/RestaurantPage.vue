@@ -3,22 +3,22 @@
         <MyHeader></MyHeader>
         <div id="container">
             <div id="banner"></div>
-            <div id="img-div"><img height="80" width="80" :src="restaurant.imgUrl"></div>
+            <div id="img-div"><img height="80" width="80" :src="restaurant.logo"></div>
             <div id="empty-div"></div>
             <div id="show-div">
                 <div id="top-info-div">
                     <h1>{{restaurant.name}}</h1>
                     <div class="stars-bar">
-                        <span class="rate-number">{{restaurant.rate}}</span>&nbsp;
-                        <star-rating :rating="restaurant.rate" :read-only="true" :increment="0.01" :star-size="20"
+                        <span class="rate-number">{{restaurant.averageRate}}</span>&nbsp;
+                        <star-rating :rating="restaurant.averageRate" :read-only="true" :increment="0.01" :star-size="20"
                                      :show-rating="false"></star-rating>
-                        <span class="rate-participant">({{restaurant.numOfRates}})</span>
+                        <span class="rate-participant">({{restaurant.comments.length}})</span>
                     </div>
                     <p class="foods">
-                        <span v-for="(food,index) in restaurant.foods" :key="index"><span
-                                v-if="index!=0">&#9679;</span> {{dictionary[food]}}</span>
+                        <span v-for="(category,index) in restaurant.categories" :key="index"><span
+                                v-if="index!=0">&#9679;</span> {{category.name}}</span>
                     </p>
-                    <p class="address">{{restaurant.address}}</p>
+                    <p class="address">{{restaurant.address.addressLine}}</p>
                 </div>
 
                 <scrollactive ref="scrollactive" id="top-nav" active-class="active-nav">
@@ -75,11 +75,11 @@
                         <h3>نظرات کاربران در مورد{{restaurant.name}}</h3>
                         <p>شما هم می‌توانید بعد از سفارش از این رستوران، نظر خود را درباره‌ی این رستوران ثبت کنید.</p>
                         <div class="stars-bar">
-                            <star-rating :rating="restaurant.rate" :read-only="true" :increment="0.01" :star-size="20"
+                            <star-rating :rating="restaurant.averageRate" :read-only="true" :increment="0.01" :star-size="20"
                                          :show-rating="false"></star-rating>
-                            <span class="rate-participant">({{restaurant.numOfRates}})</span>
+                            <span class="rate-participant">({{restaurant.comments.length}})</span>
                         </div>
-                        <span class="rate-number">{{restaurant.rate}}</span>&nbsp;
+                        <span class="rate-number">{{restaurant.averageRate}}</span>&nbsp;
                     </div>
                 </div>
                 <div id="food-set-nav"></div>
@@ -108,37 +108,20 @@
         data() {
             return {
                 restaurant: null,
-                id: 0,
-                query: "",
-                dictionary: {
-                    sandwich: "ساندویچ",
-                    burger: "برگر",
-                    pizza: "پیتزا",
-                    kebab: "کباب",
-                    salad: "سالاد",
-                    iranian: "ایرانی",
-                    pasta: "پاستا",
-                    fish: "ماهی",
-                    breakfast: "صبحانه",
-                    juice: "آبمیوه طبیعی",
-                    steak: "استیک",
-                    soup: "سوپ",
-                    fastfood: "فست فود"
-                }
+                id: "",
+                query: ""
             }
         },
         created() {
             this.id = this.$route.params.id;
-            this.query = "best-restaurants";
-
+            this.query = "/".concat(this.id);
             window.onscroll = this.myFunction;
         },
         mounted() {
-            // fetch("http://demo2469824.mockable.io/best-restaurants")
-            fetch("http://demo2469824.mockable.io/".concat(this.query))
+            fetch("http://localhost:3000/api/restaurants".concat(this.query))
                 .then(response => response.json())
                 .then((data) => {
-                    this.restaurant = data.restaurants[0];
+                    this.restaurant = data;
                 })
         },
         methods: {

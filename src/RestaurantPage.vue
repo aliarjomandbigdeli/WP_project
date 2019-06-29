@@ -6,7 +6,7 @@
             <div id="img-div"><img height="80" width="80" :src="restaurant.imgUrl"></div>
             <div id="empty-div"></div>
             <div id="show-div">
-                <div id="info-div">
+                <div id="top-info-div">
                     <h1>{{restaurant.name}}</h1>
                     <div class="stars-bar">
                         <span class="rate-number">{{restaurant.rate}}</span>&nbsp;
@@ -21,10 +21,10 @@
                     <p class="address">{{restaurant.address}}</p>
                 </div>
 
-                <scrollactive id="top-nav" active-class="-active">
-                    <a href="#one" class="scrollactive-item">منوی رستوران</a>
-                    <a href="#two" class="scrollactive-item">اطلاعات رستوران</a>
-                    <a href="#three" class="scrollactive-item">نظرات کاربران</a>
+                <scrollactive ref="scrollactive" id="top-nav" active-class="active-nav">
+                    <a href="#rest-menu" class="scrollactive-item">منوی رستوران</a>
+                    <a href="#rest-info" class="scrollactive-item">اطلاعات رستوران</a>
+                    <a href="#rest-review" id="rest-review-tab" class="scrollactive-item">نظرات کاربران</a>
                 </scrollactive>
                 <!--                <div id="tab-div">-->
                 <!--                    <div id="rest-menu">منوی رستوران</div>-->
@@ -32,8 +32,56 @@
                 <!--                    <div id="rest-review">نظرات کاربران</div>-->
                 <!--                </div>-->
             </div>
-            <div id="show-detail">
-                <div></div>
+            <div id="show-detail" class="content">
+                <div id="info-div">
+                    <div id="rest-menu">
+
+                    </div>
+                    <div id="rest-info">
+                        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo,
+                            maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id
+                            agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his
+                            ad. Eum no molestiae voluptatibus.</p>
+                        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo,
+                            maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id
+                            agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his
+                            ad. Eum no molestiae voluptatibus.</p>
+                        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo,
+                            maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id
+                            agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his
+                            ad. Eum no molestiae voluptatibus.</p>
+                        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo,
+                            maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id
+                            agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his
+                            ad. Eum no molestiae voluptatibus.</p>
+                        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo,
+                            maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id
+                            agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his
+                            ad. Eum no molestiae voluptatibus.</p>
+                        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo,
+                            maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id
+                            agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his
+                            ad. Eum no molestiae voluptatibus.</p>
+                        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo,
+                            maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id
+                            agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his
+                            ad. Eum no molestiae voluptatibus.</p>
+                        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo,
+                            maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id
+                            agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his
+                            ad. Eum no molestiae voluptatibus.</p>
+                    </div>
+                    <div id="rest-review">
+                        <h3>نظرات کاربران در مورد{{restaurant.name}}</h3>
+                        <p>شما هم می‌توانید بعد از سفارش از این رستوران، نظر خود را درباره‌ی این رستوران ثبت کنید.</p>
+                        <div class="stars-bar">
+                            <star-rating :rating="restaurant.rate" :read-only="true" :increment="0.01" :star-size="20"
+                                         :show-rating="false"></star-rating>
+                            <span class="rate-participant">({{restaurant.numOfRates}})</span>
+                        </div>
+                        <span class="rate-number">{{restaurant.rate}}</span>&nbsp;
+                    </div>
+                </div>
                 <div id="food-set-nav"></div>
             </div>
         </div>
@@ -43,15 +91,19 @@
 </template>
 
 <script>
+    // import Vue from 'vue';
     import StarRating from 'vue-star-rating'
     // import scrollactive from 'vue-scrollactive'
     // import VueScrollactive from 'vue-scrollactive'
     import MyHeader from "@/components/MyHeader";
     import MyFooter from "@/components/MyFooter";
 
+    // var Scrollactive = require('vue-scrollactive');
+    // Vue.use(Scrollactive);
+
     export default {
         name: "RestaurantPage",
-        // components: {MyFooter, MyHeader, StarRating,VueScrollactive},
+        // components: {MyFooter, MyHeader, StarRating,scrollactive},
         components: {MyFooter, MyHeader, StarRating},
         data() {
             return {
@@ -80,7 +132,6 @@
             this.query = "best-restaurants";
 
             window.onscroll = this.myFunction;
-
         },
         mounted() {
             // fetch("http://demo2469824.mockable.io/best-restaurants")
@@ -93,12 +144,29 @@
         methods: {
             myFunction() {
                 let header = document.getElementById("top-nav");
+                let review = document.getElementById("rest-review");
                 let sticky = header.offsetTop;
+                // console.log("sticky".concat(sticky));
+                // console.log(window.pageYOffset);
                 if (window.pageYOffset > sticky) {
                     header.classList.add("sticky");
-                } else {
+                }
+                if (window.pageYOffset < 346) {
                     header.classList.remove("sticky");
                 }
+
+                console.log("review".concat(review.offsetTop));
+                console.log(window.pageYOffset);
+                if (window.pageYOffset > review.offsetTop - 20) {
+                    let reviewTab = document.getElementById("rest-review-tab");
+                    reviewTab.classList.add("active-nav");
+                } else {
+                    let reviewTab = document.getElementById("rest-review-tab");
+                    reviewTab.classList.remove("active-nav");
+                }
+                // else {
+                //     review.classList.remove("active-nav");
+                // }
             }
         }
     }
@@ -163,7 +231,7 @@
         box-shadow: 0 0 3px lightgray;
     }
 
-    #info-div {
+    #top-info-div {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -200,8 +268,15 @@
 
     }
 
-    #top-nav > a {
+    .scrollactive-item {
+        color: gray !important;
+    }
+
+    .active-nav {
         color: black !important;
+        border-bottom-color: var(--btn-bg-or-highlighted-color);
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
     }
 
     .sticky {
@@ -212,6 +287,38 @@
 
     .sticky + .content {
         padding-top: 102px;
+    }
+
+    #show-detail {
+    }
+
+    #info-div {
+        display: inline-block;
+        max-width: 744px;
+        width: 100%;
+    }
+
+    #info-div > * {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    #rest-review {
+        /*display: flex;*/
+        /*flex-direction: column;*/
+        /*align-items: center;*/
+        /*width: 100%;*/
+    }
+
+    #rest-review > h3 {
+        text-align: right;
+        width: 100%;
+        padding-bottom: 5px;
+        border-bottom-color: lightgray;
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
     }
 
 </style>

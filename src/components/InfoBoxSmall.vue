@@ -10,8 +10,8 @@
                                  :show-rating="false"></star-rating>
                 </div>
                 <div class="foods detail">
-                    <span v-for="(food, index) in foods" :key="index">
-                        <span v-if="index!=0">&#9679;</span> {{dictionary[food]}}
+                    <span v-for="(category, index) in categories" :key="index">
+                        <span v-if="index!=0">&#9679;</span> {{category.name}}
                     </span>
                 </div>
                 <div class="address detail">{{address}}</div>
@@ -31,25 +31,9 @@
 
         name: "InfoBoxSmall",
         components: {StarRating},
-        props: ['name', 'rate', 'foods', 'address', 'imgUrl'],
+        props: ['name', 'rate', 'categories', 'address', 'imgUrl'],
         data() {
-            return {
-                dictionary: {
-                    sandwich: "ساندویچ",
-                    burger: "برگر",
-                    pizza: "پیتزا",
-                    kebab: "کباب",
-                    salad: "سالاد",
-                    iranian: "ایرانی",
-                    pasta: "پاستا",
-                    fish: "ماهی",
-                    breakfast: "صبحانه",
-                    juice: "آبمیوه طبیعی",
-                    steak: "استیک",
-                    soup: "سوپ",
-                    fastfood: "فست فود"
-                }
-            }
+            return {}
         }
     }
 </script>

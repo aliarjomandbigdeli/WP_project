@@ -15,13 +15,13 @@
         </div>
         <div id="result-container">
             <div id="results">
-                <router-link v-for="detail in filteredRestaurant" :key="detail.name"
-                             :to="{ name: 'RestaurantPage', params: { id: detail.id } }">
-                    <InfoBoxSmall :name="detail.name"
-                                  :rate="detail.rate"
-                                  :foods="detail.foods"
-                                  :address="detail.address"
-                                  :imgUrl="detail.imgUrl"></InfoBoxSmall>
+                <router-link v-for="restaurant in restaurants" :key="restaurant.name"
+                             :to="{ name: 'RestaurantPage', params: { id: restaurant.id } }">
+                    <InfoBoxSmall :name="restaurant.name"
+                                  :rate="restaurant.averageRate"
+                                  :categories="restaurant.categories"
+                                  :address="restaurant.address.addressLine"
+                                  :imgUrl="restaurant.logo"></InfoBoxSmall>
                 </router-link>
             </div>
             <div id="filter-checkboxes">
@@ -120,14 +120,13 @@
         created() {
             this.city = this.$route.params.city;
             this.district = this.$route.params.district;
-            this.query = "best-restaurants";
+            this.query = "?city=".concat(this.city).concat("&area=").concat(this.district);
         },
         mounted() {
-            // fetch("http://demo2469824.mockable.io/best-restaurants")
-            fetch("http://demo2469824.mockable.io/".concat(this.query))
+            fetch("http://localhost:3000/api/restaurants".concat(this.query))
                 .then(response => response.json())
                 .then((data) => {
-                    this.restaurants = data.restaurants;
+                    this.restaurants = data;
                 })
         },
         computed: {

@@ -2,9 +2,10 @@
     <div id="SearchPage">
         <MyHeader></MyHeader>
         <div id="search-banner"></div>
-        <div>checked:{{checked}},input:{{inputTxtCheckbox}},key:{{findKey(inputTxtCheckbox,checked)}}</div>
+        <div>checked:{{checked}},input:{{inputTxtCheckbox}}</div>
         <div id="loc-search-p" dir="rtl">
-            {{number}}<span> رستوران امکان سرویس دهی به </span><span class="bold">{{city}}، {{district}}</span><span> را دارند</span>
+            {{restaurants.length}}<span> رستوران امکان سرویس دهی به </span><span
+                class="bold">{{city}}، {{district}}</span><span> را دارند</span>
         </div>
         <div id="search-div">
             <div id="search-input">
@@ -41,20 +42,18 @@
             </div>
             <div id="filter-checkboxes">
                 <div id="filter-checkbox-title">فیلتر بر اساس نوع غذا</div>
-                <input id="kind-input" v-model="inputTxtCheckbox" @keyup.enter="changeCheckbox" name="kind-food"
+                <input id="kind-input" v-model="inputTxtCheckbox" @keyup.enter="inputCheckbox" name="kind-food"
                        placeholder="جستجوی دسته بندی غذاها"/>
                 <div v-for="(kind, index) in categories" :key="index">
                     <div class="kind-item" v-if="checked.includes(kind)">
-                        <md-checkbox :value="kind" v-model="checked" radio-value="filled">
-                            <!--                        <md-checkbox :value="kind" v-model="checked" radio-value="filled" @change="changeCheckbox">-->
+                        <md-checkbox :value="kind" v-model="checked" radio-value="filled" @change="changeCheckbox">
                             &nbsp;{{kind}}
                         </md-checkbox>
                     </div>
                 </div>
                 <div v-for="(kind, index) in categories" :key="index">
                     <div class="kind-item" v-if="!checked.includes(kind)">
-                        <!--                        <md-checkbox :value="kind" v-model="checked" radio-value="filled" @change="changeCheckbox">-->
-                        <md-checkbox :value="kind" v-model="checked" radio-value="filled">
+                        <md-checkbox :value="kind" v-model="checked" radio-value="filled" @change="changeCheckbox">
                             &nbsp;{{kind}}
                         </md-checkbox>
                     </div>
@@ -77,13 +76,13 @@
         components: {InfoBoxSmall, MyFooter, MyHeader},
         data() {
             return {
-                number: 0,
                 city: "",
                 district: "",
                 query: "",
                 checked: [],
                 inputTxtCheckbox: "",
                 restName: "",
+                restaurants: [],
                 categories: [
                     "ساندویچ",
                     "برگر",
@@ -98,52 +97,6 @@
                     "استیک",
                     "سوپ",
                     "فست فود"
-                ],
-                foodKinds: [
-                    'sandwich',
-                    'burger',
-                    'pizza',
-                    'kebab',
-                    'salad',
-                    'iranian',
-                    'pasta',
-                    'fish',
-                    'breakfast',
-                    'juice',
-                    'steak',
-                    'soup',
-                    'fastfood'
-                ],
-                restaurants: [],
-                dictionary: {
-                    "sandwich": "ساندویچ",
-                    "burger": "برگر",
-                    "pizza": "پیتزا",
-                    "kebab": "کباب",
-                    "salad": "سالاد",
-                    "iranian": "ایرانی",
-                    "pasta": "پاستا",
-                    "fish": "ماهی",
-                    "breakfast": "صبحانه",
-                    "juice": "آبمیوه طبیعی",
-                    "steak": "استیک",
-                    "soup": "سوپ",
-                    "fastfood": "فست فود"
-                },
-                dictionaryReverse: [
-                    "ساندویچ",
-                    "برگر",
-                    "پیتزا",
-                    "کباب",
-                    "سالاد",
-                    "ایرانی",
-                    "پاستا",
-                    "ماهی",
-                    "صبحانه",
-                    "آبمیوه طبیعی",
-                    "استیک",
-                    "سوپ",
-                    "فست فود",
                 ]
             }
         },
@@ -176,21 +129,21 @@
             }
         },
         methods: {
-            changeCheckbox() {
-                // if (!this.checked.includes(this.inputTxtCheckbox) && this.foodKinds.includes(this.inputTxtCheckbox))
-                // this.inputTxtCheckbox = this.dictionaryReverse(this.inputTxtCheckbox);
-                if (!this.checked.includes(this.inputTxtCheckbox) && this.foodKinds.includes(this.inputTxtCheckbox))
+            inputCheckbox() {
+                if (!this.checked.includes(this.inputTxtCheckbox) && this.categories.includes(this.inputTxtCheckbox))
                     this.checked.push(this.inputTxtCheckbox);
             },
-            findKey(whatever, object) {
-                // for (let key in object) {
-                for (let key in Object.keys(object)) {
-                    if (object[key] === whatever) {
-                        return Object.keys(object);
-                        // return key;
-                    }
+            changeCheckbox() {
+                let additionalQueryPart = "";
+                for (let i = 0; i < this.checked.length; i++) {
+                    additionalQueryPart.concat("&category=").concat(this.checked[i]);
                 }
-                return null;
+                console.log(`query log: ${additionalQueryPart}`);
+                fetch("http://localhost:3000/api/restaurants".concat(this.query).concat(additionalQueryPart))
+                    .then(response => response.json())
+                    .then((data) => {
+                        this.restaurants = data;
+                    })
             },
             getCurrentHour() {
                 let currentDate = new Date();

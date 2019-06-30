@@ -95,7 +95,11 @@
                         <span class="rate-number">{{restaurant.averageRate}}</span>&nbsp;
                     </div>
                 </div>
-                <div id="food-set-nav"></div>
+                <div id="food-set-nav">
+                    <a class="food-set-nav-item" v-for="(category,index) in restaurant.categories" :key="index">
+                        {{category.name}}
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -154,7 +158,8 @@
 
                 console.log("review".concat(review.offsetTop));
                 console.log(window.pageYOffset);
-                if (window.pageYOffset > review.offsetTop - 20) {
+                // if (window.pageYOffset > review.offsetTop - 20) {
+                if (window.pageYOffset > review.offsetTop) {
                     let reviewTab = document.getElementById("rest-review-tab");
                     reviewTab.classList.add("active-nav");
                 } else {
@@ -171,7 +176,7 @@
 
 <style scoped>
     #container {
-        padding: 0px;
+        padding: 0;
         position: relative;
         /*display: flex;*/
         /*flex-direction: column;*/
@@ -258,6 +263,7 @@
         /*position: fixed;*/
         background-color: white;
         max-width: 734px;
+        z-index: 1;
         /*width: 100%;*/
 
         padding: 10px;
@@ -290,6 +296,26 @@
     }
 
     #show-detail {
+        display: flex;
+        justify-content: center;
+        position: relative;
+    }
+
+    #food-set-nav {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 10%;
+        top: 0;
+        right: 0;
+        padding-right: 40px;
+    }
+
+    .food-set-nav-item{
+        color: gray !important;
+        margin: 15px 10px 15px 10px;
+        text-align: right;
     }
 
     #info-div {

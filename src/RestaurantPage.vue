@@ -50,38 +50,22 @@
                         </div>
                     </div>
                     <div id="rest-info">
-                        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo,
-                            maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id
-                            agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his
-                            ad. Eum no molestiae voluptatibus.</p>
-                        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo,
-                            maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id
-                            agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his
-                            ad. Eum no molestiae voluptatibus.</p>
-                        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo,
-                            maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id
-                            agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his
-                            ad. Eum no molestiae voluptatibus.</p>
-                        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo,
-                            maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id
-                            agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his
-                            ad. Eum no molestiae voluptatibus.</p>
-                        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo,
-                            maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id
-                            agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his
-                            ad. Eum no molestiae voluptatibus.</p>
-                        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo,
-                            maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id
-                            agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his
-                            ad. Eum no molestiae voluptatibus.</p>
-                        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo,
-                            maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id
-                            agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his
-                            ad. Eum no molestiae voluptatibus.</p>
-                        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo,
-                            maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id
-                            agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his
-                            ad. Eum no molestiae voluptatibus.</p>
+                        <h2 id="rest-info-title">اطلاعات رستوران</h2>
+                        <div id="rest-info-detail">
+                            <div id="rest-info-map-div"><img src="../mocks/map-3.png"></div>
+                            <div id="rest-info-text-detail">
+                                <h3>{{restaurant.name}}</h3>
+                                <div>
+                                    <span>{{restaurant.address.addressLine}}</span>&nbsp;<i
+                                        class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <h5><span>ساعت سفارش گیری</span>&nbsp;<i class="fas fa-clock"></i></h5>
+                                <div id="rest-info-clock">
+                                    <span>همه روزه</span>
+                                    <span>از{{restaurant.openingTime}} تا{{restaurant.closingTime}}</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div id="rest-review">
                         <h3>نظرات کاربران در مورد{{restaurant.name}}</h3>
@@ -312,7 +296,7 @@
         padding-right: 40px;
     }
 
-    .food-set-nav-item{
+    .food-set-nav-item {
         color: gray !important;
         margin: 15px 10px 15px 10px;
         text-align: right;
@@ -329,6 +313,48 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
+    }
+
+    #rest-info-title {
+        border-bottom-color: lightgray;
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+        width: 100%;
+        padding-bottom: 10px;
+        text-align: right;
+    }
+
+    /*#rest-info-map-div{*/
+    /*    width: 297px;*/
+    /*    height: 227px;*/
+    /*}*/
+
+    #rest-info-map-div > img {
+    }
+
+    #rest-info-detail {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    #rest-info-text-detail {
+        display: flex;
+        flex-direction: column;
+        text-align: right;
+        width: 100%;
+        align-items: flex-end;
+    }
+
+    #rest-info-clock {
+        width: 70%;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        border-bottom-color: lightgray;
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+        padding-bottom: 5px;
     }
 
     .category-container {

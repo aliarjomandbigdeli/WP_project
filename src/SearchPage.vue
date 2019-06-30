@@ -221,13 +221,11 @@
     .result-div {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-around;
-
-        /*justify-content: flex-end;*/
+        justify-content: flex-end;
     }
 
     .result-div > * {
-        margin: 15px 5px 15px 5px;
+        margin: 15px 20px 15px 20px;
     }
 
     #filter-checkboxes {

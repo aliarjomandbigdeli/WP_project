@@ -6,10 +6,10 @@
               crossorigin="anonymous">
 
         <div id="name-price">
-            <h3>پیتزا رومینو</h3>
-            <h3 dir="rtl"><span>39</span><span>,000</span><span>تومان</span></h3>
+            <h3>{{name}}</h3>
+            <h3 dir="rtl"><span>{{price}}</span><span>,000</span><span>تومان</span></h3>
         </div>
-        <div id="description">سس مارینارا، پپرونی، بیکن، فلفل هالوپینو، سس کرم چیلی و میکس پنیر</div>
+        <div id="description">{{description}}</div>
         <div id="btn-div">
             <div id="add-btn">افزودن به سبد خرید<span>&nbsp;</span><i class="fas fa-plus"></i></div>
         </div>
@@ -34,9 +34,9 @@
         flex-direction: column;
         justify-content: center;
         padding: 10px;
-        /*height: 179px;*/
+        height: 146px;
         width: 362px;
-        /*flex-basis: 313px;*/
+        flex-basis: 362px;
     }
 
     #main-frame:hover {

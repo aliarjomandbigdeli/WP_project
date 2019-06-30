@@ -10,7 +10,8 @@
                     <h1>{{restaurant.name}}</h1>
                     <div class="stars-bar">
                         <span class="rate-number">{{restaurant.averageRate}}</span>&nbsp;
-                        <star-rating :rating="restaurant.averageRate" :read-only="true" :increment="0.01" :star-size="20"
+                        <star-rating :rating="restaurant.averageRate" :read-only="true" :increment="0.01"
+                                     :star-size="20"
                                      :show-rating="false"></star-rating>
                         <span class="rate-participant">({{restaurant.comments.length}})</span>
                     </div>
@@ -26,16 +27,27 @@
                     <a href="#rest-info" class="scrollactive-item">اطلاعات رستوران</a>
                     <a href="#rest-review" id="rest-review-tab" class="scrollactive-item">نظرات کاربران</a>
                 </div>
-<!--                <scrollactive ref="scrollactive" id="top-nav" active-class="active-nav">-->
-<!--                    <a href="#rest-menu" class="scrollactive-item">منوی رستوران</a>-->
-<!--                    <a href="#rest-info" class="scrollactive-item">اطلاعات رستوران</a>-->
-<!--                    <a href="#rest-review" id="rest-review-tab" class="scrollactive-item">نظرات کاربران</a>-->
-<!--                </scrollactive>-->
+                <!--                <scrollactive ref="scrollactive" id="top-nav" active-class="active-nav">-->
+                <!--                    <a href="#rest-menu" class="scrollactive-item">منوی رستوران</a>-->
+                <!--                    <a href="#rest-info" class="scrollactive-item">اطلاعات رستوران</a>-->
+                <!--                    <a href="#rest-review" id="rest-review-tab" class="scrollactive-item">نظرات کاربران</a>-->
+                <!--                </scrollactive>-->
             </div>
             <div id="show-detail" class="content">
                 <div id="info-div">
                     <div id="rest-menu">
-                        <FoodInfoCard></FoodInfoCard>
+                        <div class="category-container" v-for="(category,index) in restaurant.categories" :key="index">
+                            <h2 class="food-container-title">{{category.name}}</h2>
+                            <div class="foods-container">
+                                <div v-for="(food, index) in restaurant.foods" :key="index">
+                                    <FoodInfoCard v-if="food.foodSet ===category.name"
+                                                  :name="food.name"
+                                                  :price="food.price"
+                                                  :description="food.description"></FoodInfoCard>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div id="rest-info">
                         <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo,
@@ -75,7 +87,8 @@
                         <h3>نظرات کاربران در مورد{{restaurant.name}}</h3>
                         <p>شما هم می‌توانید بعد از سفارش از این رستوران، نظر خود را درباره‌ی این رستوران ثبت کنید.</p>
                         <div class="stars-bar">
-                            <star-rating :rating="restaurant.averageRate" :read-only="true" :increment="0.01" :star-size="20"
+                            <star-rating :rating="restaurant.averageRate" :read-only="true" :increment="0.01"
+                                         :star-size="20"
                                          :show-rating="false"></star-rating>
                             <span class="rate-participant">({{restaurant.comments.length}})</span>
                         </div>
@@ -230,6 +243,8 @@
 
     .rate-number {
         color: orange;
+        font-size: 1rem;
+        font-weight: bold
     }
 
     .address, .rate-participant {
@@ -288,6 +303,29 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
+    }
+
+    .category-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    .food-container-title {
+        width: 100%;
+        text-align: right;
+    }
+
+    .foods-container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+    }
+
+    /*margin for FoodInfoBox*/
+    .foods-container > div > * {
+        margin: 10px 0 10px 10px;
     }
 
     #rest-review {

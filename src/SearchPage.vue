@@ -219,6 +219,18 @@
         background-color: #fafafa;
     }
 
+    .result-div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+        /*justify-content: flex-end;*/
+    }
+
+    .result-div > * {
+        margin: 15px 5px 15px 5px;
+    }
+
     #filter-checkboxes {
         direction: rtl;
         border-radius: 5px;
@@ -265,16 +277,6 @@
     #closed-title {
         text-align: right;
         padding-right: 30px;
-    }
-
-    .result-div {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-    }
-
-    .result-div > * {
-        margin: 15px 5px 15px 5px;
     }
 
 </style>

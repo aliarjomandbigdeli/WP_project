@@ -138,9 +138,8 @@
                 for (let i = 0; i < this.checked.length; i++) {
                     additionalQueryPart = additionalQueryPart.concat("&category=").concat(this.checked[i]);
                 }
-                console.log(`query log: ${additionalQueryPart}`);
-                // fetch("http://localhost:3000/api/restaurants".concat(this.query).concat(additionalQueryPart))
-                fetch("http://localhost:3000/api/restaurants".concat(this.query))
+                // console.log(`query log: ${additionalQueryPart}`);
+                fetch("http://localhost:3000/api/restaurants".concat(this.query).concat(additionalQueryPart))
                     .then(response => response.json())
                     .then((data) => {
                         this.restaurants = data;

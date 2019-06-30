@@ -21,21 +21,21 @@
                     <p class="address">{{restaurant.address.addressLine}}</p>
                 </div>
 
-                <scrollactive ref="scrollactive" id="top-nav" active-class="active-nav">
+                <div ref="scrollactive" id="top-nav" active-class="active-nav">
                     <a href="#rest-menu" class="scrollactive-item">منوی رستوران</a>
                     <a href="#rest-info" class="scrollactive-item">اطلاعات رستوران</a>
                     <a href="#rest-review" id="rest-review-tab" class="scrollactive-item">نظرات کاربران</a>
-                </scrollactive>
-                <!--                <div id="tab-div">-->
-                <!--                    <div id="rest-menu">منوی رستوران</div>-->
-                <!--                    <div id="rest-info">اطلاعات رستوران</div>-->
-                <!--                    <div id="rest-review">نظرات کاربران</div>-->
-                <!--                </div>-->
+                </div>
+<!--                <scrollactive ref="scrollactive" id="top-nav" active-class="active-nav">-->
+<!--                    <a href="#rest-menu" class="scrollactive-item">منوی رستوران</a>-->
+<!--                    <a href="#rest-info" class="scrollactive-item">اطلاعات رستوران</a>-->
+<!--                    <a href="#rest-review" id="rest-review-tab" class="scrollactive-item">نظرات کاربران</a>-->
+<!--                </scrollactive>-->
             </div>
             <div id="show-detail" class="content">
                 <div id="info-div">
                     <div id="rest-menu">
-
+                        <FoodInfoCard></FoodInfoCard>
                     </div>
                     <div id="rest-info">
                         <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo,
@@ -97,6 +97,7 @@
     // import VueScrollactive from 'vue-scrollactive'
     import MyHeader from "@/components/MyHeader";
     import MyFooter from "@/components/MyFooter";
+    import FoodInfoCard from "@/components/FoodInfoCard";
 
     // var Scrollactive = require('vue-scrollactive');
     // Vue.use(Scrollactive);
@@ -104,7 +105,7 @@
     export default {
         name: "RestaurantPage",
         // components: {MyFooter, MyHeader, StarRating,scrollactive},
-        components: {MyFooter, MyHeader, StarRating},
+        components: {FoodInfoCard, MyFooter, MyHeader, StarRating},
         data() {
             return {
                 restaurant: null,
@@ -237,6 +238,7 @@
 
     #top-nav {
         display: flex;
+        flex-direction: row-reverse;
         justify-content: space-around;
         /*position: fixed;*/
         background-color: white;

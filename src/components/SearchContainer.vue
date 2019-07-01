@@ -20,10 +20,10 @@
             <!--            </select>-->
             <div id="search-input">
                 <input list="districts" name="district" placeholder="مثلا نیاوران" dir="rtl" v-model="district"
-                       @keyup.enter="onSubmit">
+                       @keyup.enter="onSubmit" @click="updateAreaList">
                 <datalist id="districts">
                     <option>&#128205;جستجو خودکار منطقه شما</option>
-                    <!--                    <option value="&#128205;جستجو خودکار منطقه شما">&#128205;جستجو خودکار منطقه شما</option>-->
+                    <option v-for="(area,index) in areaList" :key="index">{{area}}</option>
                 </datalist>
                 <div id="location-icon"><i class="fas fa-map-marker-alt"></i></div>
             </div>
@@ -65,6 +65,7 @@
             return {
                 city: "",
                 district: "",
+                restaurants: [],
                 config: {
                     options: [
                         {
@@ -89,9 +90,27 @@
                 }
             }
         },
+        computed: {
+            areaList: function () {
+                let list = [];
+                for (let i = 0; i < this.restaurants.length; i++) {
+                    if (!list.includes(this.restaurants[i].address.area)) {
+                        list.push(this.restaurants[i].address.area)
+                    }
+                }
+                return list;
+            }
+        },
         methods: {
             onSubmit() {
                 router.push({name: "SearchPage", params: {city: this.city, district: this.district}});
+            },
+            updateAreaList() {
+                fetch("http://localhost:3000/api/restaurants/area/".concat(this.city))
+                    .then(response => response.json())
+                    .then((data) => {
+                        this.restaurants = data;
+                    })
             },
             setNewSelectedOption(selectedOption) {
                 this.config.placeholder = selectedOption.value;

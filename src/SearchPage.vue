@@ -2,7 +2,6 @@
     <div id="SearchPage">
         <MyHeader></MyHeader>
         <div id="search-banner"></div>
-        <div>checked:{{checked}},input:{{inputTxtCheckbox}}</div>
         <div id="loc-search-p" dir="rtl">
             {{restaurants.length}}<span> رستوران امکان سرویس دهی به </span><span
                 class="bold">{{city}}، {{district}}</span><span> را دارند</span>

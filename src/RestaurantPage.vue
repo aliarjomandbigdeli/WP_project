@@ -37,7 +37,7 @@
                 <div id="info-div">
                     <div id="rest-menu">
                         <div class="category-container" v-for="(category,index) in restaurant.categories" :key="index">
-                            <h2 class="food-container-title">{{category.name}}</h2>
+                            <h2 :id="''.concat(category.id)" class="food-container-title">{{category.name}}</h2>
                             <div class="foods-container">
                                 <div v-for="(food, index) in restaurant.foods" :key="index">
                                     <FoodInfoCard v-if="food.foodSet ===category.name"
@@ -100,7 +100,8 @@
                     </div>
                 </div>
                 <div id="food-set-nav">
-                    <a class="food-set-nav-item" v-for="(category,index) in restaurant.categories" :key="index">
+                    <a :href="'#'.concat(category.id)" :id="''.concat(category.id).concat('-tab')"
+                       class="food-set-nav-item" v-for="(category,index) in restaurant.categories" :key="index">
                         {{category.name}}
                     </a>
                 </div>
@@ -175,6 +176,8 @@
                     header.classList.remove("sticky");
                 }
 
+                let foodSetNav = document.getElementById("food-set-nav");
+
                 //because show-detail div has relative position, we need offset
                 let offSet = 392 - 25;
 
@@ -189,21 +192,66 @@
                 // console.log("log: info: ".concat(info.offsetTop));
                 // console.log("log: menu: ".concat(menu.offsetTop));
                 // console.log("log: window offset:".concat(window.pageYOffset));
+                if (window.pageYOffset < menu.offsetTop + offSet) {
+                    foodSetNav.classList.remove("food-set-nav-sticky");
+                }
                 if (window.pageYOffset > menu.offsetTop + offSet && window.pageYOffset < info.offsetTop + offSet) {
                     menuTab.classList.add("active-nav");
                     infoTab.classList.remove("active-nav");
                     reviewTab.classList.remove("active-nav");
+                    foodSetNav.classList.add("food-set-nav-sticky");
                 }
                 if (window.pageYOffset > (info.offsetTop + offSet) && window.pageYOffset < (review.offsetTop + offSet)) {
                     infoTab.classList.add("active-nav");
                     menuTab.classList.remove("active-nav");
                     reviewTab.classList.remove("active-nav");
+                    foodSetNav.classList.remove("food-set-nav-sticky");
                 }
                 if (window.pageYOffset > review.offsetTop + offSet) {
                     reviewTab.classList.add("active-nav");
                     menuTab.classList.remove("active-nav");
                     infoTab.classList.remove("active-nav");
+                    foodSetNav.classList.remove("food-set-nav-sticky");
                 }
+
+                //#### foodSet nav ####
+                let elements = [];
+                let tabElements = [];
+                for (let i = 0; i < this.restaurant.categories.length; i++) {
+                    elements.push(document.getElementById(''.concat(this.restaurant.categories[i].id)));
+                    tabElements.push(document.getElementById(''.concat(this.restaurant.categories[i].id).concat('-tab')));
+                }
+
+                for (let i = 0; i < this.restaurant.categories.length - 1; i++) {
+                    if (window.pageYOffset > elements[i].offsetTop + offSet && window.pageYOffset < elements[i + 1].offsetTop + offSet) {
+                        for (let j = 0; j < this.restaurant.categories.length; j++) {
+                            if (j === i) {
+                                tabElements[j].classList.add("active-nav");
+                            } else {
+                                tabElements[j].classList.remove("active-nav");
+                            }
+
+                        }
+                    }
+                }
+                let i = this.restaurant.categories.length - 1;
+                if (window.pageYOffset > elements[i].offsetTop + offSet && window.pageYOffset < info.offsetTop + offSet) {
+                    for (let j = 0; j < this.restaurant.categories.length; j++) {
+                        if (j === i) {
+                            tabElements[j].classList.add("active-nav");
+                        } else {
+                            tabElements[j].classList.remove("active-nav");
+                        }
+
+                    }
+                }
+                if (window.pageYOffset < menu.offsetTop + offSet) {
+                    for (let j = 0; j < this.restaurant.categories.length; j++) {
+                        tabElements[j].classList.remove("active-nav");
+
+                    }
+                }
+
             }
         }
     }
@@ -338,6 +386,7 @@
 
     #food-set-nav {
         position: absolute;
+        /*position: fixed;*/
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -345,6 +394,10 @@
         top: 0;
         right: 0;
         padding-right: 40px;
+    }
+
+    .food-set-nav-sticky {
+        position: fixed !important;
     }
 
     .food-set-nav-item {

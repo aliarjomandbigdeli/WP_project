@@ -52,7 +52,7 @@
                     <div id="rest-info">
                         <h2 id="rest-info-title">اطلاعات رستوران</h2>
                         <div id="rest-info-detail">
-                            <div id="rest-info-map-div"><img src="../mocks/map-3.png"></div>
+                            <div id="rest-info-map-div"><img src="../mocks/map.png"></div>
                             <div id="rest-info-text-detail">
                                 <h3>{{restaurant.name}}</h3>
                                 <div>
@@ -68,15 +68,34 @@
                         </div>
                     </div>
                     <div id="rest-review">
-                        <h3>نظرات کاربران در مورد{{restaurant.name}}</h3>
-                        <p>شما هم می‌توانید بعد از سفارش از این رستوران، نظر خود را درباره‌ی این رستوران ثبت کنید.</p>
+                        <h2>نظرات کاربران در مورد{{restaurant.name}}</h2>
+                        <p id="rest-review-p">شما هم می‌توانید بعد از سفارش از این رستوران، نظر خود را درباره‌ی این
+                            رستوران ثبت کنید</p>
                         <div class="stars-bar">
                             <star-rating :rating="restaurant.averageRate" :read-only="true" :increment="0.01"
                                          :star-size="20"
                                          :show-rating="false"></star-rating>
                             <span class="rate-participant">({{restaurant.comments.length}})</span>
                         </div>
-                        <span class="rate-number">{{restaurant.averageRate}}</span>&nbsp;
+                        <span class="rate-number">{{restaurant.averageRate}}</span>
+                        <div class="rate-detail-div">
+                            <div>کیفیت غذا</div>
+                            <div class="progress-and-number">
+                                <div>4.7</div>
+                                <div class="rate-progress-bar">
+                                    <div :style="{ width: 70 + '%' }"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rate-detail-div">
+                            <div>کیفیت بسته بندی</div>
+                            <div class="progress-and-number">
+                                <div>4.7</div>
+                                <div class="rate-progress-bar">
+                                    <div :style="{ width: 50 + '%' }"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div id="food-set-nav">
@@ -140,8 +159,8 @@
                     header.classList.remove("sticky");
                 }
 
-                console.log("review".concat(review.offsetTop));
-                console.log(window.pageYOffset);
+                // console.log("review".concat(review.offsetTop));
+                // console.log(window.pageYOffset);
                 // if (window.pageYOffset > review.offsetTop - 20) {
                 if (window.pageYOffset > review.offsetTop) {
                     let reviewTab = document.getElementById("rest-review-tab");
@@ -384,16 +403,52 @@
         /*display: flex;*/
         /*flex-direction: column;*/
         /*align-items: center;*/
-        /*width: 100%;*/
+        width: 100%;
     }
 
-    #rest-review > h3 {
+    #rest-review > h2 {
         text-align: right;
         width: 100%;
-        padding-bottom: 5px;
+        padding-bottom: 10px;
         border-bottom-color: lightgray;
         border-bottom-style: solid;
         border-bottom-width: 1px;
     }
+
+    #rest-review-p {
+        width: 100%;
+        text-align: right;
+    }
+
+    .rate-detail-div {
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+        border-top-color: lightgray;
+        border-top-style: solid;
+        border-top-width: 1px;
+        padding: 15px 0 15px 0;
+    }
+
+    .progress-and-number {
+        display: flex;
+        width: 60%;
+        align-items: center;
+    }
+
+    .rate-progress-bar {
+        display: flex;
+        background-color: lightgray;
+        border-radius: 10px;
+        width: 100%;
+        height: 0.8em;
+        margin-left: 10px;
+    }
+
+    .rate-progress-bar > * {
+        background-color: orange;
+        border-radius: 10px;
+    }
+
 
 </style>

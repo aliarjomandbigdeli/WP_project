@@ -95,7 +95,8 @@
                         </div>
                         <div id="border-div"></div>
                         <CommentShowBox v-for="(comment, index) in restaurant.comments" :key="index"
-                                        :author="comment.author" :rate-number="comment.quality"></CommentShowBox>
+                                        :author="comment.author" :rate-number="comment.quality"
+                                        :date="comment.created_at"></CommentShowBox>
                     </div>
                 </div>
                 <div id="food-set-nav">

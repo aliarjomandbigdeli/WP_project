@@ -16,7 +16,8 @@
             <i class="fas fa-quote-right"></i>
         </div>
         <div class="bottom-div">
-            <div dir="rtl">8 ماه قبل</div>
+            <!--            <div dir="rtl">8 ماه قبل</div>-->
+            <div dir="rtl">{{diffDate(date)}}</div>
             <div>گزارش</div>
         </div>
 
@@ -29,8 +30,26 @@
     export default {
         name: "CommentShowBox",
         components: {StarRating},
-        props: ['author', 'rateNumber'],
-        computed: {}
+        props: ['author', 'rateNumber', 'date'],
+        methods: {
+            diffDate(date) {
+                let currentDate = new Date();
+                let year = currentDate.getFullYear();
+                let month = currentDate.getMonth();
+                date = new Date(date);
+                let commentYear = date.getFullYear();
+                let commentMonth = date.getMonth();
+                if (year - commentYear > 0) {
+                    return "".concat(year - commentYear).concat("سال قبل")
+                } else {
+                    if (month - commentMonth > 0) {
+                        return "".concat(currentDate.getDay() - date.getDay()).concat("روز قبل")
+                    } else {
+                        return "".concat(month - commentMonth).concat("ماه قبل")
+                    }
+                }
+            }
+        }
     }
 </script>
 
@@ -53,7 +72,7 @@
         justify-content: space-between;
     }
 
-    #star-rating-id{
+    #star-rating-id {
         color: orange;
         font-weight: bold;
     }

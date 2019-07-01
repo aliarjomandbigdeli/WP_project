@@ -80,21 +80,18 @@
                         <span class="rate-number">{{restaurant.averageRate}}</span>
                         <div class="rate-detail-div">
                             <div>کیفیت غذا</div>
-                            <div class="progress-and-number">
-                                <div>4.7</div>
-                                <div class="rate-progress-bar">
-                                    <div :style="{ width: 70 + '%' }"></div>
-                                </div>
-                            </div>
+                            <RatingProgressBar :number="qualityAvg"
+                                               :fill-percent="qualityAvg*100/5"></RatingProgressBar>
                         </div>
                         <div class="rate-detail-div">
                             <div>کیفیت بسته بندی</div>
-                            <div class="progress-and-number">
-                                <div>4.7</div>
-                                <div class="rate-progress-bar">
-                                    <div :style="{ width: 50 + '%' }"></div>
-                                </div>
-                            </div>
+                            <RatingProgressBar :number="packagingAvg"
+                                               :fill-percent="packagingAvg*100/5"></RatingProgressBar>
+                        </div>
+                        <div class="rate-detail-div">
+                            <div>سرعت ارسال پیک</div>
+                            <RatingProgressBar :number="deliveryTimeAvg"
+                                               :fill-percent="deliveryTimeAvg*100/5"></RatingProgressBar>
                         </div>
                     </div>
                 </div>
@@ -111,21 +108,15 @@
 </template>
 
 <script>
-    // import Vue from 'vue';
     import StarRating from 'vue-star-rating'
-    // import scrollactive from 'vue-scrollactive'
-    // import VueScrollactive from 'vue-scrollactive'
     import MyHeader from "@/components/MyHeader";
     import MyFooter from "@/components/MyFooter";
     import FoodInfoCard from "@/components/FoodInfoCard";
-
-    // var Scrollactive = require('vue-scrollactive');
-    // Vue.use(Scrollactive);
+    import RatingProgressBar from "@/components/RatingProgressBar";
 
     export default {
         name: "RestaurantPage",
-        // components: {MyFooter, MyHeader, StarRating,scrollactive},
-        components: {FoodInfoCard, MyFooter, MyHeader, StarRating},
+        components: {RatingProgressBar, FoodInfoCard, MyFooter, MyHeader, StarRating},
         data() {
             return {
                 restaurant: null,
@@ -144,6 +135,29 @@
                 .then((data) => {
                     this.restaurant = data;
                 })
+        },
+        computed: {
+            qualityAvg: function () {
+                let avg = 0;
+                for (let i = 0; i < this.restaurant.comments.length; i++) {
+                    avg += this.restaurant.comments[i].quality;
+                }
+                return avg / this.restaurant.comments.length;
+            },
+            packagingAvg: function () {
+                let avg = 0;
+                for (let i = 0; i < this.restaurant.comments.length; i++) {
+                    avg += this.restaurant.comments[i].packaging;
+                }
+                return avg / this.restaurant.comments.length;
+            },
+            deliveryTimeAvg: function () {
+                let avg = 0;
+                for (let i = 0; i < this.restaurant.comments.length; i++) {
+                    avg += this.restaurant.comments[i].deliveryTime;
+                }
+                return avg / this.restaurant.comments.length;
+            }
         },
         methods: {
             myFunction() {
@@ -441,26 +455,6 @@
         border-top-style: solid;
         border-top-width: 1px;
         padding: 15px 0 15px 0;
-    }
-
-    .progress-and-number {
-        display: flex;
-        width: 60%;
-        align-items: center;
-    }
-
-    .rate-progress-bar {
-        display: flex;
-        background-color: lightgray;
-        border-radius: 10px;
-        width: 100%;
-        height: 0.8em;
-        margin-left: 10px;
-    }
-
-    .rate-progress-bar > * {
-        background-color: orange;
-        border-radius: 10px;
     }
 
 

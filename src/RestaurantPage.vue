@@ -93,7 +93,7 @@
                             <RatingProgressBar :number="deliveryTimeAvg"
                                                :fill-percent="deliveryTimeAvg*100/5"></RatingProgressBar>
                         </div>
-
+                        <div id="border-div"></div>
                         <CommentShowBox v-for="(comment, index) in restaurant.comments" :key="index"
                                         :author="comment.author" :rate-number="comment.quality"></CommentShowBox>
                     </div>
@@ -461,5 +461,12 @@
         padding: 15px 0 15px 0;
     }
 
+    #border-div {
+        background-color: lightgray;
+        width: 100%;
+        height: 1px;
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
 
 </style>

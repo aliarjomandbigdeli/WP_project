@@ -7,7 +7,7 @@
 
         <div class="top-div">
             <div>{{author}}</div>
-            <star-rating :rating="rateNumber" :read-only="true" :increment="0.01"
+            <star-rating id="star-rating-id" :rating="rateNumber" :read-only="true" :increment="0.01"
                          :star-size="20"
                          :show-rating="true"></star-rating>
         </div>
@@ -37,8 +37,7 @@
 <style scoped>
     .main-frame {
         width: 100%;
-        padding-top: 20px;
-        padding-bottom: 10px;
+        padding: 20px 5px 10px 5px;
         border-bottom-color: lightgray;
         border-bottom-style: solid;
         border-bottom-width: 1px;
@@ -52,6 +51,11 @@
         display: flex;
         flex-direction: row-reverse;
         justify-content: space-between;
+    }
+
+    #star-rating-id{
+        color: orange;
+        font-weight: bold;
     }
 
     .center-div {

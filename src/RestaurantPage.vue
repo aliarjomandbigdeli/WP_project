@@ -93,6 +93,9 @@
                             <RatingProgressBar :number="deliveryTimeAvg"
                                                :fill-percent="deliveryTimeAvg*100/5"></RatingProgressBar>
                         </div>
+
+                        <CommentShowBox v-for="(comment, index) in restaurant.comments" :key="index"
+                                        :author="comment.author" :rate-number="comment.quality"></CommentShowBox>
                     </div>
                 </div>
                 <div id="food-set-nav">
@@ -113,10 +116,11 @@
     import MyFooter from "@/components/MyFooter";
     import FoodInfoCard from "@/components/FoodInfoCard";
     import RatingProgressBar from "@/components/RatingProgressBar";
+    import CommentShowBox from "@/components/CommentShowBox";
 
     export default {
         name: "RestaurantPage",
-        components: {RatingProgressBar, FoodInfoCard, MyFooter, MyHeader, StarRating},
+        components: {CommentShowBox, RatingProgressBar, FoodInfoCard, MyFooter, MyHeader, StarRating},
         data() {
             return {
                 restaurant: null,

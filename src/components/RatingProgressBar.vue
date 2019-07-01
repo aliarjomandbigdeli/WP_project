@@ -1,6 +1,6 @@
 <template>
     <div class="progress-and-number">
-        <div>{{number}}</div>
+        <div class="number-div">{{number}}</div>
         <div class="rate-progress-bar">
             <div :style="{ width: fillPercent + '%' }"></div>
         </div>
@@ -19,6 +19,12 @@
         display: flex;
         width: 60%;
         align-items: center;
+    }
+
+    .number-div {
+        color: orange;
+        font-weight: bold;
+        font-size: 1.1em;
     }
 
     .rate-progress-bar {

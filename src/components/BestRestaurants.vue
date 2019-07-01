@@ -46,6 +46,14 @@
 </script>
 
 <style scoped>
+    /* Responsive layout - when the screen is less than 650px wide, hide sms-img */
+    @media screen and (max-width: 650px) {
+        #best-rest-grid {
+            grid-template-columns: auto auto !important; /*make 2 columns*/
+
+        }
+    }
+
     #best-restaurant-div {
         padding: 50px;
         background-image: url("../../mocks/best-restaurunt.png");

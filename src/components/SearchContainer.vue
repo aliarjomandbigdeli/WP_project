@@ -12,12 +12,12 @@
             <vue-dropdown id="city-sel" :config="config"
                           @setSelectedOption="setNewSelectedOption($event)"></vue-dropdown>
 
-<!--            <select name="citySel" id="city-sel" v-model="city">-->
-<!--                <option value="تهران">تهران</option>-->
-<!--                <option value="اصفهان">اصفهان</option>-->
-<!--                <option value="شیراز">شیراز</option>-->
-<!--                <option value="مشهد">مشهد</option>-->
-<!--            </select>-->
+            <!--            <select name="citySel" id="city-sel" v-model="city">-->
+            <!--                <option value="تهران">تهران</option>-->
+            <!--                <option value="اصفهان">اصفهان</option>-->
+            <!--                <option value="شیراز">شیراز</option>-->
+            <!--                <option value="مشهد">مشهد</option>-->
+            <!--            </select>-->
             <div id="search-input">
                 <input list="districts" name="district" placeholder="مثلا نیاوران" dir="rtl" v-model="district"
                        @keyup.enter="onSubmit">
@@ -121,6 +121,7 @@
         padding: 10px;
         border-radius: 10px;
         /*background-color: white;*/
+        /*height: 84px;*/
         width: 50%;
         min-width: 430px;
     }
@@ -138,6 +139,7 @@
 
     #search-input {
         display: flex;
+        background-color: white;
         border-bottom-right-radius: 10px;
         border-top-right-radius: 10px;
         border: 1px solid lightgray;

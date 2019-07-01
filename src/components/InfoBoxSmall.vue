@@ -53,6 +53,7 @@
         display: flex;
         /*box-shadow: 0 0 3px lightgray;*/
         justify-content: flex-end;
+        align-items: flex-start;
         padding: 5px 5px 0 5px;
         height: 179px;
         width: 313px;

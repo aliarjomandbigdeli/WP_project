@@ -23,8 +23,8 @@
                 </div>
 
                 <div ref="scrollactive" id="top-nav" active-class="active-nav">
-                    <a href="#rest-menu" class="scrollactive-item">منوی رستوران</a>
-                    <a href="#rest-info" class="scrollactive-item">اطلاعات رستوران</a>
+                    <a href="#rest-menu" id="rest-menu-tab" class="scrollactive-item">منوی رستوران</a>
+                    <a href="#rest-info" id="rest-info-tab" class="scrollactive-item">اطلاعات رستوران</a>
                     <a href="#rest-review" id="rest-review-tab" class="scrollactive-item">نظرات کاربران</a>
                 </div>
                 <!--                <scrollactive ref="scrollactive" id="top-nav" active-class="active-nav">-->
@@ -148,10 +148,7 @@
         methods: {
             myFunction() {
                 let header = document.getElementById("top-nav");
-                let review = document.getElementById("rest-review");
                 let sticky = header.offsetTop;
-                // console.log("sticky".concat(sticky));
-                // console.log(window.pageYOffset);
                 if (window.pageYOffset > sticky) {
                     header.classList.add("sticky");
                 }
@@ -159,19 +156,35 @@
                     header.classList.remove("sticky");
                 }
 
-                // console.log("review".concat(review.offsetTop));
-                // console.log(window.pageYOffset);
-                // if (window.pageYOffset > review.offsetTop - 20) {
-                if (window.pageYOffset > review.offsetTop) {
-                    let reviewTab = document.getElementById("rest-review-tab");
-                    reviewTab.classList.add("active-nav");
-                } else {
-                    let reviewTab = document.getElementById("rest-review-tab");
+                //because show-detail div has relative position, we need offset
+                let offSet = 392 - 25;
+
+                let review = document.getElementById("rest-review");
+                let info = document.getElementById("rest-info");
+                let menu = document.getElementById("rest-menu");
+                let reviewTab = document.getElementById("rest-review-tab");
+                let infoTab = document.getElementById("rest-info-tab");
+                let menuTab = document.getElementById("rest-menu-tab");
+
+                // console.log("log: review: ".concat(review.offsetTop));
+                // console.log("log: info: ".concat(info.offsetTop));
+                // console.log("log: menu: ".concat(menu.offsetTop));
+                // console.log("log: window offset:".concat(window.pageYOffset));
+                if (window.pageYOffset > menu.offsetTop + offSet && window.pageYOffset < info.offsetTop + offSet) {
+                    menuTab.classList.add("active-nav");
+                    infoTab.classList.remove("active-nav");
                     reviewTab.classList.remove("active-nav");
                 }
-                // else {
-                //     review.classList.remove("active-nav");
-                // }
+                if (window.pageYOffset > (info.offsetTop + offSet) && window.pageYOffset < (review.offsetTop + offSet)) {
+                    infoTab.classList.add("active-nav");
+                    menuTab.classList.remove("active-nav");
+                    reviewTab.classList.remove("active-nav");
+                }
+                if (window.pageYOffset > review.offsetTop + offSet) {
+                    reviewTab.classList.add("active-nav");
+                    menuTab.classList.remove("active-nav");
+                    infoTab.classList.remove("active-nav");
+                }
             }
         }
     }

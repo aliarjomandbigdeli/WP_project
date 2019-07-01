@@ -12,11 +12,10 @@
                          :show-rating="true"></star-rating>
         </div>
         <div class="center-div">
-            <span>بسته یندی غذا بسیار خوب است</span>
+            <span>{{text}}</span>
             <i class="fas fa-quote-right"></i>
         </div>
         <div class="bottom-div">
-            <!--            <div dir="rtl">8 ماه قبل</div>-->
             <div dir="rtl">{{diffDate(date)}}</div>
             <div>گزارش</div>
         </div>
@@ -30,7 +29,7 @@
     export default {
         name: "CommentShowBox",
         components: {StarRating},
-        props: ['author', 'rateNumber', 'date'],
+        props: ['author', 'rateNumber', 'text', 'date'],
         methods: {
             diffDate(date) {
                 let currentDate = new Date();
@@ -43,9 +42,9 @@
                     return "".concat(year - commentYear).concat("سال قبل")
                 } else {
                     if (month - commentMonth > 0) {
-                        return "".concat(currentDate.getDay() - date.getDay()).concat("روز قبل")
-                    } else {
                         return "".concat(month - commentMonth).concat("ماه قبل")
+                    } else {
+                        return "".concat(currentDate.getDay() - date.getDay()).concat("روز قبل")
                     }
                 }
             }

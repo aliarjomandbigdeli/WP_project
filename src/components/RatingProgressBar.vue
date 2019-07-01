@@ -1,6 +1,6 @@
 <template>
     <div class="progress-and-number">
-        <div class="number-div">{{number}}</div>
+        <div class="number-div">{{number.toFixed(1)}}</div>
         <div class="rate-progress-bar">
             <div :style="{ width: fillPercent + '%' }"></div>
         </div>

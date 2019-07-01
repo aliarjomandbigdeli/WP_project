@@ -62,7 +62,7 @@
 </script>
 
 <style scoped>
-    /* Responsive layout - when the screen is less than 900px wide, hide sms-img */
+    /* Responsive layout - when the screen is less than 1050px wide, hide sms-img */
     @media screen and (max-width: 1050px) {
         #sms-img {
             display: none;

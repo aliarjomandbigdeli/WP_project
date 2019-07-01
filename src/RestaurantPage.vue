@@ -258,15 +258,16 @@
 </script>
 
 <style scoped>
+    /* Responsive layout - when the screen is less than 1000px wide, hide food-set-nav */
+    @media screen and (max-width: 1000px) {
+        #food-set-nav {
+            display: none !important;
+        }
+    }
+
     #container {
         padding: 0;
         position: relative;
-        /*display: flex;*/
-        /*flex-direction: column;*/
-        /*justify-content: center;*/
-        /*align-content: center;*/
-        /*align-items: center;*/
-        /*alignment: center;*/
         text-align: center;
     }
 
@@ -282,15 +283,11 @@
 
     #img-div {
         display: flex;
-        /*display: inline-block;*/
         position: absolute;
         left: 47%;
-        /*marign-left: auto;*/
-        /*margin-right: auto;*/
         top: 100px;
         justify-content: center;
         z-index: +1;
-
     }
 
     #img-div > img {
@@ -310,8 +307,7 @@
         background-color: white;
         max-width: 744px;
         width: 100%;
-        /*padding: 15px 10px 5px 10px;*/
-        padding: 15px 0px 5px 0px;
+        padding: 15px 0 5px 0;
 
         box-shadow: 0 0 3px lightgray;
     }
@@ -321,8 +317,6 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        /*align-content: center;*/
-
     }
 
     .stars-bar {
@@ -343,18 +337,14 @@
         display: flex;
         flex-direction: row-reverse;
         justify-content: space-around;
-        /*position: fixed;*/
         background-color: white;
         max-width: 734px;
         z-index: 1;
-        /*width: 100%;*/
 
         padding: 10px;
         border-top-color: lightgray;
         border-top-style: solid;
         border-top-width: 1px;
-
-
     }
 
     .scrollactive-item {
@@ -386,7 +376,6 @@
 
     #food-set-nav {
         position: absolute;
-        /*position: fixed;*/
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -485,9 +474,6 @@
     }
 
     #rest-review {
-        /*display: flex;*/
-        /*flex-direction: column;*/
-        /*align-items: center;*/
         width: 100%;
     }
 

@@ -23,15 +23,10 @@
                 </div>
 
                 <div ref="scrollactive" id="top-nav" active-class="active-nav">
-                    <a href="#rest-menu" id="rest-menu-tab" class="scrollactive-item">منوی رستوران</a>
-                    <a href="#rest-info" id="rest-info-tab" class="scrollactive-item">اطلاعات رستوران</a>
-                    <a href="#rest-review" id="rest-review-tab" class="scrollactive-item">نظرات کاربران</a>
+                    <a v-scroll-to="'#rest-menu'" id="rest-menu-tab" class="scrollactive-item">منوی رستوران</a>
+                    <a v-scroll-to="'#rest-info'" id="rest-info-tab" class="scrollactive-item">اطلاعات رستوران</a>
+                    <a v-scroll-to="'#rest-review'" id="rest-review-tab" class="scrollactive-item">نظرات کاربران</a>
                 </div>
-                <!--                <scrollactive ref="scrollactive" id="top-nav" active-class="active-nav">-->
-                <!--                    <a href="#rest-menu" class="scrollactive-item">منوی رستوران</a>-->
-                <!--                    <a href="#rest-info" class="scrollactive-item">اطلاعات رستوران</a>-->
-                <!--                    <a href="#rest-review" id="rest-review-tab" class="scrollactive-item">نظرات کاربران</a>-->
-                <!--                </scrollactive>-->
             </div>
             <div id="show-detail" class="content">
                 <div id="info-div">
@@ -100,7 +95,7 @@
                     </div>
                 </div>
                 <div id="food-set-nav">
-                    <a :href="'#'.concat(category.id)" :id="''.concat(category.id).concat('-tab')"
+                    <a v-scroll-to="'#'.concat(category.id)" :id="''.concat(category.id).concat('-tab')"
                        class="food-set-nav-item" v-for="(category,index) in restaurant.categories" :key="index">
                         {{category.name}}
                     </a>

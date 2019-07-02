@@ -65,7 +65,7 @@
             return {
                 city: "",
                 district: "",
-                restaurants: [],
+                restaurantsAddress: [],
                 config: {
                     options: [
                         {
@@ -92,10 +92,11 @@
         },
         computed: {
             areaList: function () {
+                this.updateAreaList();
                 let list = [];
-                for (let i = 0; i < this.restaurants.length; i++) {
-                    if (!list.includes(this.restaurants[i].address.area)) {
-                        list.push(this.restaurants[i].address.area)
+                for (let i = 0; i < this.restaurantsAddress.length; i++) {
+                    if (!list.includes(this.restaurantsAddress[i].address.area)) {
+                        list.push(this.restaurantsAddress[i].address.area)
                     }
                 }
                 return list;
@@ -106,11 +107,13 @@
                 router.push({name: "SearchPage", params: {city: this.city, district: this.district}});
             },
             updateAreaList() {
-                fetch("http://localhost:3000/api/restaurants/area/".concat(this.city))
-                    .then(response => response.json())
-                    .then((data) => {
-                        this.restaurants = data;
-                    })
+                if (this.city) {
+                    fetch("http://localhost:3000/api/restaurants/area/".concat(this.city))
+                        .then(response => response.json())
+                        .then((data) => {
+                            this.restaurantsAddress = data;
+                        })
+                }
             },
             setNewSelectedOption(selectedOption) {
                 this.config.placeholder = selectedOption.value;

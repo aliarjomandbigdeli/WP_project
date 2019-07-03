@@ -5,6 +5,29 @@
             <div id="banner"></div>
             <div id="img-div"><img height="80" width="80" :src="restaurant.logo"></div>
             <div id="empty-div"></div>
+            <div id="show-loc-div">
+                <div id="loc-button-div">
+                    <div class="cursor-pointer" @click="$router.go(-1)">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 -5 25 25"><path
+                                fill="currentColor" fill-rule="evenodd"
+                                d="M9.17 19.708L.607 11.444a1.95 1.95 0 0 1 0-2.827L9.232.292c.4-.385 1.048-.39 1.454-.01a.976.976 0 0 1 .011 1.425L2.803 9.324a.975.975 0 0 0 0 1.414l7.831 7.557a.974.974 0 0 1 0 1.413c-.405.39-1.06.39-1.464 0z"></path></svg>
+                        </span>بازگشت
+                    </div>
+                    <div>ریحون<span><svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 -5 25 25">
+                        <path fill="currentColor" fill-rule="evenodd"
+                              d="M9.17 19.708L.607 11.444a1.95 1.95 0 0 1 0-2.827L9.232.292c.4-.385 1.048-.39 1.454-.01a.976.976 0 0 1 .011 1.425L2.803 9.324a.975.975 0 0 0 0 1.414l7.831 7.557a.974.974 0 0 1 0 1.413c-.405.39-1.06.39-1.464 0z"></path></svg>
+                        </span>
+                        {{restaurant.address.city}}، {{restaurant.address.area}}<span><svg
+                                xmlns="http://www.w3.org/2000/svg" width="9" height="9"
+                                viewBox="0 -5 25 25"><path fill="currentColor"
+                                                           fill-rule="evenodd"
+                                                           d="M9.17 19.708L.607 11.444a1.95 1.95 0 0 1 0-2.827L9.232.292c.4-.385 1.048-.39 1.454-.01a.976.976 0 0 1 .011 1.425L2.803 9.324a.975.975 0 0 0 0 1.414l7.831 7.557a.974.974 0 0 1 0 1.413c-.405.39-1.06.39-1.464 0z"></path></svg>
+                        </span>
+                        {{restaurant.name}}
+                    </div>
+                </div>
+
+            </div>
             <div id="show-div">
                 <div id="top-info-div">
                     <h1>{{restaurant.name}}</h1>
@@ -23,9 +46,15 @@
                 </div>
 
                 <div ref="scrollactive" id="top-nav" active-class="active-nav">
-                    <a v-scroll-to="'#rest-menu'" id="rest-menu-tab" class="scrollactive-item">منوی رستوران</a>
-                    <a v-scroll-to="'#rest-info'" id="rest-info-tab" class="scrollactive-item">اطلاعات رستوران</a>
-                    <a v-scroll-to="'#rest-review'" id="rest-review-tab" class="scrollactive-item">نظرات کاربران</a>
+                    <div v-scroll-to="'#rest-menu'" id="rest-menu-tab" class="scrollactive-item cursor-pointer">
+                        منوی رستوران
+                    </div>
+                    <div v-scroll-to="'#rest-info'" id="rest-info-tab" class="scrollactive-item cursor-pointer">
+                        اطلاعات رستوران
+                    </div>
+                    <div v-scroll-to="'#rest-review'" id="rest-review-tab" class="scrollactive-item cursor-pointer">
+                        نظرات کاربران
+                    </div>
                 </div>
             </div>
             <div id="show-detail" class="content">
@@ -96,14 +125,10 @@
                 </div>
                 <div id="food-set-nav">
                     <div v-scroll-to="'#'.concat(category.id)" :id="''.concat(category.id).concat('-tab')"
-                         class="food-set-nav-item" v-for="(category,index) in restaurant.categories" :key="index">
+                         class="food-set-nav-item cursor-pointer" v-for="(category,index) in restaurant.categories"
+                         :key="index">
                         {{category.name}}
                     </div>
-
-                    <!--                    <a v-scroll-to="'#'.concat(category.id)" :id="''.concat(category.id).concat('-tab')"-->
-                    <!--                       class="food-set-nav-item" v-for="(category,index) in restaurant.categories" :key="index">-->
-                    <!--                        {{category.name}}-->
-                    <!--                    </a>-->
                 </div>
             </div>
         </div>
@@ -269,6 +294,7 @@
         padding: 0;
         position: relative;
         text-align: center;
+        justify-content: center;
     }
 
     #banner {
@@ -299,8 +325,33 @@
 
     #empty-div {
         width: 100%;
-        height: 150px;
+        /*height: 150px;*/
+        height: 110px;
     }
+
+    #show-loc-div {
+        display: inline-block;
+        max-width: 744px;
+        width: 100%;
+    }
+
+    #loc-button-div {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 10px;
+    }
+
+    #loc-button-div > div {
+        background-color: hsla(0, 0%, 100%, .9);
+        border-radius: 5px;
+        padding: 5px;
+        font-size: 0.8em;
+    }
+
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
 
     #show-div {
         display: inline-block;

@@ -95,10 +95,15 @@
                     </div>
                 </div>
                 <div id="food-set-nav">
-                    <a v-scroll-to="'#'.concat(category.id)" :id="''.concat(category.id).concat('-tab')"
-                       class="food-set-nav-item" v-for="(category,index) in restaurant.categories" :key="index">
+                    <div v-scroll-to="'#'.concat(category.id)" :id="''.concat(category.id).concat('-tab')"
+                         class="food-set-nav-item" v-for="(category,index) in restaurant.categories" :key="index">
                         {{category.name}}
-                    </a>
+                    </div>
+
+                    <!--                    <a v-scroll-to="'#'.concat(category.id)" :id="''.concat(category.id).concat('-tab')"-->
+                    <!--                       class="food-set-nav-item" v-for="(category,index) in restaurant.categories" :key="index">-->
+                    <!--                        {{category.name}}-->
+                    <!--                    </a>-->
                 </div>
             </div>
         </div>
@@ -221,9 +226,9 @@
                     if (window.pageYOffset > elements[i].offsetTop + offSet && window.pageYOffset < elements[i + 1].offsetTop + offSet) {
                         for (let j = 0; j < this.restaurant.categories.length; j++) {
                             if (j === i) {
-                                tabElements[j].classList.add("active-nav");
+                                tabElements[j].classList.add("food-set-active-nav");
                             } else {
-                                tabElements[j].classList.remove("active-nav");
+                                tabElements[j].classList.remove("food-set-active-nav");
                             }
 
                         }
@@ -233,16 +238,16 @@
                 if (window.pageYOffset > elements[i].offsetTop + offSet && window.pageYOffset < info.offsetTop + offSet) {
                     for (let j = 0; j < this.restaurant.categories.length; j++) {
                         if (j === i) {
-                            tabElements[j].classList.add("active-nav");
+                            tabElements[j].classList.add("food-set-active-nav");
                         } else {
-                            tabElements[j].classList.remove("active-nav");
+                            tabElements[j].classList.remove("food-set-active-nav");
                         }
 
                     }
                 }
                 if (window.pageYOffset < menu.offsetTop + offSet) {
                     for (let j = 0; j < this.restaurant.categories.length; j++) {
-                        tabElements[j].classList.remove("active-nav");
+                        tabElements[j].classList.remove("food-set-active-nav");
 
                     }
                 }
@@ -377,17 +382,29 @@
         width: 10%;
         top: 0;
         right: 0;
-        padding-right: 40px;
+        /*padding-right: 40px;*/
+        padding: 20px;
     }
 
     .food-set-nav-sticky {
         position: fixed !important;
     }
 
+    .food-set-active-nav {
+        color: black !important;
+        border-bottom-color: var(--btn-bg-or-highlighted-color);
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+        padding-right: 20px;
+        font-size: 1.1em;
+    }
+
     .food-set-nav-item {
-        color: gray !important;
+        display: flex;
+        justify-content: flex-end;
+        color: gray;
         margin: 15px 10px 15px 10px;
-        text-align: right;
+        /*text-align: right;*/
     }
 
     #info-div {

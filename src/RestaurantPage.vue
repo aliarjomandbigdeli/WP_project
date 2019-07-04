@@ -127,7 +127,7 @@
                     <div v-scroll-to="'#'.concat(foodSet)" :id="''.concat(foodSet).concat('-tab')"
                          class="food-set-nav-item cursor-pointer" v-for="(foodSet,index) in foodSetList"
                          :key="index">
-                        {{dictionary[foodSet]}}
+                        <div>{{dictionary[foodSet]}}</div>
                     </div>
                 </div>
             </div>
@@ -464,10 +464,13 @@
 
     .food-set-active-nav {
         color: black !important;
+        padding-right: 20px;
+    }
+
+    .food-set-active-nav > * {
         border-bottom-color: var(--btn-bg-or-highlighted-color);
         border-bottom-style: solid;
         border-bottom-width: 2px;
-        padding-right: 20px;
         font-size: 1.1em;
     }
 

@@ -44,5 +44,15 @@
         --btn-bg-or-highlighted-color: #d40062;
         --loign-register-txt-color: gray;
         --loign-register-bg-color: #f6f9fc;
+
+
+        --md-theme-default-primary: #448aff;
+        --md-theme-default-accent: #d40062;
+        --md-theme-default-theme: light;
+
+        /*original*/
+        /*--md-theme-default-primary: #448aff;*/
+        /*--md-theme-default-accent: #ff5252;*/
+        /*--md-theme-default-theme: light;*/
     }
 </style>

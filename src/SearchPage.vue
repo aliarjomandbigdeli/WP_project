@@ -50,6 +50,7 @@
                         </md-checkbox>
                     </div>
                 </div>
+                <div id="border-div" v-if="checked.length > 0"></div>
                 <div v-for="(kind, index) in categories" :key="index">
                     <div class="kind-item" v-if="!checked.includes(kind)">
                         <md-checkbox :value="kind" v-model="checked" radio-value="filled" @change="changeCheckbox">
@@ -243,6 +244,7 @@
         border-width: 1px;
         margin: 5px 10px 5px 10px;
         background-color: #fafafa;
+        height: 2.4rem;
         line-height: 1.8;
         outline-width: 0;
     }
@@ -261,6 +263,12 @@
 
     .md-checkbox {
         display: flex;
+    }
+
+    #border-div {
+        height: 3px;
+        width: 100%;
+        background-color: lightgray;
     }
 
     #closed-title {

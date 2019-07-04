@@ -60,11 +60,11 @@
             <div id="show-detail" class="content">
                 <div id="info-div">
                     <div id="rest-menu">
-                        <div class="category-container" v-for="(category,index) in restaurant.categories" :key="index">
-                            <h2 :id="''.concat(category.id)" class="food-container-title">{{category.name}}</h2>
+                        <div class="category-container" v-for="(foodSet,index) in foodSetList" :key="index">
+                            <h2 :id="''.concat(foodSet)" class="food-container-title">{{dictionary[foodSet]}}</h2>
                             <div class="foods-container">
                                 <div v-for="(food, index) in restaurant.foods" :key="index">
-                                    <FoodInfoCard v-if="food.foodSet ===category.name"
+                                    <FoodInfoCard v-if="food.foodSet ===foodSet"
                                                   :name="food.name"
                                                   :price="food.price"
                                                   :description="food.description"></FoodInfoCard>
@@ -124,10 +124,10 @@
                     </div>
                 </div>
                 <div id="food-set-nav">
-                    <div v-scroll-to="'#'.concat(category.id)" :id="''.concat(category.id).concat('-tab')"
-                         class="food-set-nav-item cursor-pointer" v-for="(category,index) in restaurant.categories"
+                    <div v-scroll-to="'#'.concat(foodSet)" :id="''.concat(foodSet).concat('-tab')"
+                         class="food-set-nav-item cursor-pointer" v-for="(foodSet,index) in foodSetList"
                          :key="index">
-                        {{category.name}}
+                        {{dictionary[foodSet]}}
                     </div>
                 </div>
             </div>
@@ -152,7 +152,23 @@
             return {
                 restaurant: null,
                 id: "",
-                query: ""
+                query: "",
+                foodSetList: [],
+                dictionary: {
+                    sandwich: "ساندویچ",
+                    burger: "برگر",
+                    pizza: "پیتزا",
+                    kebab: "کباب",
+                    salad: "سالاد",
+                    iranian: "ایرانی",
+                    pasta: "پاستا",
+                    fish: "ماهی",
+                    breakfast: "صبحانه",
+                    juice: "آبمیوه طبیعی",
+                    steak: "استیک",
+                    soup: "سوپ",
+                    fastfood: "فست فود"
+                }
             }
         },
         created() {
@@ -165,6 +181,11 @@
                 .then(response => response.json())
                 .then((data) => {
                     this.restaurant = data;
+                    for (let i = 0; i < data.foods.length; i++) {
+                        if (!this.foodSetList.includes(data.foods[i].foodSet)) {
+                            this.foodSetList.push(data.foods[i].foodSet);
+                        }
+                    }
                 })
         },
         computed: {

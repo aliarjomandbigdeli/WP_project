@@ -82,21 +82,7 @@
                 inputTxtCheckbox: "",
                 restName: "",
                 restaurants: [],
-                categories: [
-                    "ساندویچ",
-                    "برگر",
-                    "پیتزا",
-                    "کباب",
-                    "سالاد",
-                    "ایرانی",
-                    "پاستا",
-                    "ماهی",
-                    "صبحانه",
-                    "آبمیوه طبیعی",
-                    "استیک",
-                    "سوپ",
-                    "فست فود"
-                ]
+                categories: []
             }
         },
         created() {
@@ -109,7 +95,14 @@
                 .then(response => response.json())
                 .then((data) => {
                     this.restaurants = data;
-                })
+                    for (let i = 0; i < data.length; i++) {
+                        for (let j = 0; j < data[i].categories.length; j++) {
+                            if (!this.categories.includes(data[i].categories[j].name)) {
+                                this.categories.push(data[i].categories[j].name);
+                            }
+                        }
+                    }
+                });
         },
         computed: {
             openFilteredRestaurant: function () {

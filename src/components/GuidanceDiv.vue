@@ -71,5 +71,6 @@
         box-shadow: 1px 1px 2px 2px lightgray;
         justify-content: center;
         align-items: center;
+        height: 124px;
     }
 </style>

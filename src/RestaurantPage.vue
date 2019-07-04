@@ -59,11 +59,16 @@
             </div>
             <div id="show-detail" class="content">
                 <div id="info-div">
+                    <div id="search-input">
+                        <input name="rest-name" v-model="foodSearchName"
+                               placeholder="جستجوی در منوی این رستوران" dir="rtl">
+                        <div><i class="fas fa-search"></i></div>
+                    </div>
                     <div id="rest-menu">
                         <div class="category-container" v-for="(foodSet,index) in foodSetList" :key="index">
                             <h2 :id="''.concat(foodSet)" class="food-container-title">{{dictionary[foodSet]}}</h2>
                             <div class="foods-container">
-                                <div v-for="(food, index) in restaurant.foods" :key="index">
+                                <div v-for="(food, index) in filteredFoodList" :key="index">
                                     <FoodInfoCard v-if="food.foodSet ===foodSet"
                                                   :name="food.name"
                                                   :price="food.price"
@@ -154,6 +159,8 @@
                 id: "",
                 query: "",
                 foodSetList: [],
+                foodList: [],
+                foodSearchName: "",
                 dictionary: {
                     sandwich: "ساندویچ",
                     burger: "برگر",
@@ -181,6 +188,7 @@
                 .then(response => response.json())
                 .then((data) => {
                     this.restaurant = data;
+                    this.foodList = data.foods;
                     for (let i = 0; i < data.foods.length; i++) {
                         if (!this.foodSetList.includes(data.foods[i].foodSet)) {
                             this.foodSetList.push(data.foods[i].foodSet);
@@ -209,7 +217,13 @@
                     avg += this.restaurant.comments[i].deliveryTime;
                 }
                 return avg / this.restaurant.comments.length;
-            }
+            },
+            filteredFoodList: function () {
+                return this.foodList.filter((food) => {
+                    return food.name.match(this.foodSearchName);
+                })
+            },
+
         },
         methods: {
             myFunction() {
@@ -493,6 +507,41 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
+    }
+
+    #search-input {
+        display: flex;
+        flex-direction: row;
+        padding-top: 15px;
+        border-radius: 5px;
+        border-bottom: 1px solid lightgray;
+        align-content: flex-end;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+
+    #search-input > input {
+        border-width: 0;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        padding: 5px;
+        background-color: #fafafa;
+        font-size: 1.1em;
+        width: 100%;
+    }
+
+    #search-input > input:focus {
+        outline-width: 0;
+    }
+
+    #search-input > div {
+        padding: 5px;
+    }
+
+    #search-input > div > i {
+        background-color: #fafafa;
+        color: gray;
+        font-size: 1.3em;
     }
 
     #rest-info-title {

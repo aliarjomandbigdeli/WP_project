@@ -69,7 +69,7 @@
                             <h2 :id="''.concat(foodSet)" class="food-container-title">{{dictionary[foodSet]}}</h2>
                             <div class="foods-container">
                                 <div v-for="(food, index) in filteredFoodList" :key="index">
-                                    <FoodInfoCard v-if="food.foodSet ===foodSet"
+                                    <FoodInfoCard v-show="food.foodSet ===foodSet"
                                                   :name="food.name"
                                                   :price="food.price"
                                                   :description="food.description"></FoodInfoCard>
@@ -424,7 +424,7 @@
         flex-direction: row-reverse;
         justify-content: space-around;
         background-color: white;
-        max-width: 734px;
+        max-width: 744px;
         z-index: 1;
 
         padding: 10px;
@@ -448,6 +448,7 @@
         position: fixed;
         top: 0;
         width: 100%;
+        box-shadow: 0 0 3px lightgray;
     }
 
     .sticky + .content {

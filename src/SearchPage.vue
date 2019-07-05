@@ -44,15 +44,15 @@
                 <input id="kind-input" v-model="inputTxtCheckbox" @keyup.enter="inputCheckbox" name="kind-food"
                        placeholder="جستجوی دسته بندی غذاها"/>
                 <div v-for="(kind, index) in categories" :key="index">
-                    <div class="kind-item" v-if="checked.includes(kind)">
+                    <div class="kind-item" v-show="checked.includes(kind)">
                         <md-checkbox :value="kind" v-model="checked" radio-value="filled" @change="changeCheckbox">
                             &nbsp;{{kind}}
                         </md-checkbox>
                     </div>
                 </div>
-                <div id="border-div" v-if="checked.length > 0"></div>
+                <div id="border-div" v-show="checked.length > 0"></div>
                 <div v-for="(kind, index) in categories" :key="index">
-                    <div class="kind-item" v-if="!checked.includes(kind)">
+                    <div class="kind-item" v-show="!checked.includes(kind)">
                         <md-checkbox :value="kind" v-model="checked" radio-value="filled" @change="changeCheckbox">
                             &nbsp;{{kind}}
                         </md-checkbox>

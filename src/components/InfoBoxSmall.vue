@@ -1,5 +1,5 @@
 <template>
-    <div id="main-frame">
+    <div id="main-frame" :class="{closedRest: !opened}">
         <div id="frame" :class="{closedRest: !opened}">
             <div class="best-month-div-items">
 
@@ -18,7 +18,7 @@
             </div>
             <div><img height="80" width="80" :src="imgUrl"></div>
         </div>
-        <div v-if="opened" id="order-btn-div">
+        <div v-show="opened" id="order-btn-div">
             <div id="order-bst-rest-btn">شروع سفارش</div>
         </div>
     </div>
@@ -43,6 +43,7 @@
     #main-frame {
         box-shadow: 0 0 3px lightgray;
         background-color: white;
+        height: 241px;
     }
 
     #main-frame:hover {
@@ -131,6 +132,6 @@
 
 
     .closedRest {
-        background-color: lightgray;
+        background-color: lightgray !important;
     }
 </style>

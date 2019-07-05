@@ -7,7 +7,7 @@
 
         <div id="name-price">
             <h3>{{name}}</h3>
-            <h3 dir="rtl"><span>{{price}}</span><span>,000</span><span>تومان</span></h3>
+            <h3 dir="rtl"><span>{{price}}</span><span>,000</span><span style="font-size: 0.8em">تومان</span></h3>
         </div>
         <div id="description">{{description}}</div>
         <div id="btn-div">

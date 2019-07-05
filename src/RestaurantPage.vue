@@ -514,17 +514,18 @@
         display: flex;
         flex-direction: row;
         padding-top: 15px;
-        border-radius: 5px;
         border-bottom: 1px solid lightgray;
         align-content: flex-end;
         justify-content: flex-end;
         align-items: flex-end;
     }
 
+    #search-input:focus-within {
+        border-bottom: 1px solid var(--btn-bg-or-highlighted-color);
+    }
+
     #search-input > input {
         border-width: 0;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
         padding: 5px;
         background-color: #fafafa;
         font-size: 1.1em;

@@ -69,7 +69,7 @@
                             <h2 :id="''.concat(foodSet)" class="food-container-title">{{dictionary[foodSet]}}</h2>
                             <div class="foods-container">
                                 <div v-for="(food, index) in filteredFoodList" :key="index">
-                                    <FoodInfoCard v-show="food.foodSet ===foodSet"
+                                    <FoodInfoCard v-show="food.foodSet === foodSet"
                                                   :name="food.name"
                                                   :price="food.price"
                                                   :description="food.description"></FoodInfoCard>
@@ -194,7 +194,7 @@
                             this.foodSetList.push(data.foods[i].foodSet);
                         }
                     }
-                })
+                });
         },
         computed: {
             qualityAvg: function () {
@@ -277,14 +277,14 @@
                 //#### foodSet nav ####
                 let elements = [];
                 let tabElements = [];
-                for (let i = 0; i < this.restaurant.categories.length; i++) {
-                    elements.push(document.getElementById(''.concat(this.restaurant.categories[i].id)));
-                    tabElements.push(document.getElementById(''.concat(this.restaurant.categories[i].id).concat('-tab')));
+                for (let i = 0; i < this.foodSetList.length; i++) {
+                    elements.push(document.getElementById(''.concat(this.foodSetList[i])));
+                    tabElements.push(document.getElementById(''.concat(this.foodSetList[i]).concat('-tab')));
                 }
 
-                for (let i = 0; i < this.restaurant.categories.length - 1; i++) {
+                for (let i = 0; i < this.foodSetList.length - 1; i++) {
                     if (window.pageYOffset > elements[i].offsetTop + offSet && window.pageYOffset < elements[i + 1].offsetTop + offSet) {
-                        for (let j = 0; j < this.restaurant.categories.length; j++) {
+                        for (let j = 0; j < this.foodSetList.length; j++) {
                             if (j === i) {
                                 tabElements[j].classList.add("food-set-active-nav");
                             } else {
@@ -294,9 +294,9 @@
                         }
                     }
                 }
-                let i = this.restaurant.categories.length - 1;
+                let i = this.foodSetList.length - 1;
                 if (window.pageYOffset > elements[i].offsetTop + offSet && window.pageYOffset < info.offsetTop + offSet) {
-                    for (let j = 0; j < this.restaurant.categories.length; j++) {
+                    for (let j = 0; j < this.foodSetList.length; j++) {
                         if (j === i) {
                             tabElements[j].classList.add("food-set-active-nav");
                         } else {
@@ -306,7 +306,7 @@
                     }
                 }
                 if (window.pageYOffset < menu.offsetTop + offSet) {
-                    for (let j = 0; j < this.restaurant.categories.length; j++) {
+                    for (let j = 0; j < this.foodSetList.length; j++) {
                         tabElements[j].classList.remove("food-set-active-nav");
 
                     }

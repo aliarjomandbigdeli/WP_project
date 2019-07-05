@@ -4,7 +4,7 @@
         <div id="search-banner"></div>
         <div id="loc-search-p" dir="rtl">
             {{restaurants.length}}<span> رستوران امکان سرویس دهی به </span><span
-                class="bold">{{city}}، {{district}}</span><span> را دارند</span>
+                class="bold under-line">{{city}}، {{district}}</span><span> را دارند</span>
         </div>
         <div id="search-div">
             <div id="search-input">
@@ -161,6 +161,10 @@
 
     .bold {
         font-weight: bold;
+    }
+
+    .under-line {
+        border-bottom: 1px solid lightgray;
     }
 
     #search-div {

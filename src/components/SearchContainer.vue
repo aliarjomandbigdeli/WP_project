@@ -124,7 +124,7 @@
             },
             updateAreaList() {
                 if (this.city) {
-                    fetch("http://localhost:3000/api/restaurants/area/".concat(this.city))
+                    fetch("http://localhost:3000/api/restaurants/suggest/".concat(this.city).concat("/").concat(this.district))
                         .then(response => response.json())
                         .then((data) => {
                             this.restaurantsAddress = data;
